@@ -26,7 +26,7 @@ public class StackManager : MonoBehaviour
 
         // spawn 1 more brick
         var playerScript = GetComponent<PlayerScript>();
-        StartCoroutine(playerScript.currentlyStandingFloor.GetComponent<BrickSpawner>().SpawnItemsAtWill(1, playerScript.playerColorIndex));
+        playerScript.currentlyStandingFloor.transform.GetChild(0).GetComponent<spawnOntoShape>().SpawnOnDemand(playerScript.playerColorIndex);
     }
 
     public bool isPopable()

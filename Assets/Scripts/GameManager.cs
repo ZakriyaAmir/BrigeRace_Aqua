@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -9,6 +10,8 @@ public class GameManager : MonoBehaviour
     public GameObject winPanel;
     public GameObject losePanel;
     public GameObject player;
+
+    public PlayerScript[] allPlayers;
 
     public static GameManager instance;
 
@@ -25,7 +28,26 @@ public class GameManager : MonoBehaviour
             instance = this;
         }
 
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
+    }
+
+    private void Start()
+    {
+        allPlayers = FindObjectsOfType<PlayerScript>();
+        foreach (PlayerScript player in allPlayers)
+        {
+            player.enabled = false;
+            if (player.isAI)
+            {
+                player.GetComponent<NavMeshAgent>().enabled = false;
+                player.GetComponent<Rigidbody>().isKinematic = true;
+                player.GetComponent<AIController>().enabled = false;
+            }
+            else
+            {
+                player.GetComponent<MoveScript>().controller.enabled = false;
+            }
+        }
     }
 
     void Update()
@@ -56,6 +78,9 @@ public class GameManager : MonoBehaviour
 
     public void StartTheGame()
     {
-        Time.timeScale = 1;
+        foreach (PlayerScript player in allPlayers)
+        {
+            player.StartGame();
+        }
     }
 }

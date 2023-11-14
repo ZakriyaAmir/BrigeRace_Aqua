@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -8,6 +9,21 @@ public class PlayerScript : MonoBehaviour
     public int playerColorIndex;
     public GameObject currentlyStandingFloor;
     public bool isAI;
+
+    public void StartGame() 
+    {
+        this.enabled = true;
+        if (isAI)
+        {
+            GetComponent<NavMeshAgent>().enabled = true;
+            GetComponent<Rigidbody>().isKinematic = false;
+            GetComponent<AIController>().enabled = true;
+        }
+        else
+        {
+            GetComponent<MoveScript>().controller.enabled = true;
+        }
+    }
 
     private void Update()
     {
@@ -25,8 +41,10 @@ public class PlayerScript : MonoBehaviour
                 {
                     currentlyStandingFloor = hit.transform.gameObject;
 
-                    if (isAI)
+                    if (isAI) 
+                    {
                         gameObject.GetComponent<AIController>().SetCurrentlyStandingFloor();
+                    }
                 }
             }
         }

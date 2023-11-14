@@ -9,11 +9,12 @@ public class MoveScript : MonoBehaviour
 {
     [SerializeField] private FixedJoystick joystick;
     [SerializeField] private Animator animator;
-    [SerializeField] private CharacterController controller;
+    [SerializeField] public CharacterController controller;
     [SerializeField] private float moveSpeed = 6f;
 
     public ParticleSystem splash1;
     public ParticleSystem splash2;
+    public ParticleSystem splash3;
 
     public bool onFloor;
 

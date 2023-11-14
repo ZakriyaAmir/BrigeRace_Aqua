@@ -33,40 +33,52 @@ public class spawnOntoShape : MonoBehaviour
             // Spawn each object the specified number of times
             for (int i = 0; i < spawnCountPerObject; i++)
             {
-                Vector3 randomPosition = new Vector3(
+                bool spawnable = false;
+                Vector3 randomPosition;
+                do
+                {
+                    randomPosition = new Vector3(
                     Random.Range(bounds.min.x, bounds.max.x),
                     0 - 0.3f,
                     Random.Range(bounds.min.z, bounds.max.z)
-                );
+                    );
 
-                // Check if the random position is inside the model and not overlapping with other objects
-                if (IsPointInsideModel(randomPosition, meshCollider) && !IsOverlapping(randomPosition))
-                {
-                    // Spawn the current object at the random position
-                    GameObject brick = Instantiate(objectPrefab, randomPosition, Quaternion.identity);
-                    brick.transform.parent = bricksParent;
+                    if (IsPointInsideModel(randomPosition, meshCollider) && !IsOverlapping(randomPosition))
+                    {
+                        // Spawn the current object at the random position
+                        GameObject brick = Instantiate(objectPrefab, randomPosition, Quaternion.identity);
+                        brick.transform.parent = bricksParent;
+                        spawnable = true;
+                    }
                 }
+                while (!spawnable);
             }
         }
     }
 
-    public void SpawnOnDemand(int playerColorIndex) 
+    public void SpawnOnDemand(int playerColorIndex)
     {
         Bounds bounds = (meshCollider != null) ? meshCollider.bounds : meshFilter.mesh.bounds;
 
-        Vector3 randomPosition = new Vector3(
-        Random.Range(bounds.min.x, bounds.max.x),
-        0 - 0.3f,
-        Random.Range(bounds.min.z, bounds.max.z)
-                    );
-
-        // Check if the random position is inside the model and not overlapping with other objects
-        if (IsPointInsideModel(randomPosition, meshCollider) && !IsOverlapping(randomPosition))
+        bool spawnable = false;
+        Vector3 randomPosition;
+        do
         {
-            // Spawn the current object at the random position
-            GameObject brick = Instantiate(objectsToSpawn[playerColorIndex], randomPosition, Quaternion.identity);
-            brick.transform.parent = bricksParent;
+            randomPosition = new Vector3(
+            Random.Range(bounds.min.x, bounds.max.x),
+            0 - 0.3f,
+            Random.Range(bounds.min.z, bounds.max.z)
+            );
+
+            if (IsPointInsideModel(randomPosition, meshCollider) && !IsOverlapping(randomPosition))
+            {
+                // Spawn the current object at the random position
+                GameObject brick = Instantiate(objectsToSpawn[playerColorIndex], randomPosition, Quaternion.identity);
+                brick.transform.parent = bricksParent;
+                spawnable = true;
+            }
         }
+        while (!spawnable);
     }
 
     bool IsPointInsideModel(Vector3 point, MeshCollider collider)

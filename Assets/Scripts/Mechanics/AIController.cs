@@ -12,9 +12,9 @@ public class AIController : MonoBehaviour
     private PlayerScript playerScript;
     [SerializeField] private bool haveTarget = false;
 
-    private Vector3 targetTransform;
-    private GameObject currentlyStandingFloor;
-    private GameObject brickSpawnContainer = null;
+    public Vector3 targetTransform;
+    public GameObject currentlyStandingFloor;
+    public GameObject brickSpawnContainer = null;
 
     private GameObject availableBridges;
     private GameObject targetBridge;
@@ -41,6 +41,8 @@ public class AIController : MonoBehaviour
 
     public IEnumerator GetTargets()
     {
+
+        yield return new WaitForSeconds(1f);
         if (targets.Count == 0)
         {
             while (brickSpawnContainer == null)

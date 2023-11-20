@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -10,8 +11,12 @@ public class GameManager : MonoBehaviour
     public GameObject winPanel;
     public GameObject losePanel;
     public GameObject player;
-
     public PlayerScript[] allPlayers;
+    public levelBehavior[] allLevels;
+    public GameObject[] playerPrefabs;
+    public GameObject[] enemyPrefabs;
+    public levelBehavior currentLevel;
+    public GameObject loadingPanel;
 
     public static GameManager instance;
 
@@ -27,13 +32,24 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
         }
-
-        //Time.timeScale = 0;
+        player = Instantiate(playerPrefabs[PlayerPrefs.GetInt("selectedPlayer", 0)]);
+        currentLevel = Instantiate(allLevels[PlayerPrefs.GetInt("currentLevel", 0)]).GetComponent<levelBehavior>();
+        //Spawn all enemies
+        for (int i = 0; i < currentLevel.totalEnemies; i++) 
+        {
+            GameObject enemy = Instantiate(enemyPrefabs[i]);
+        }
     }
 
     private void Start()
     {
         allPlayers = FindObjectsOfType<PlayerScript>();
+        StopAllPlayers();
+        currentLevel.AssignUniqueSpawnPositions();
+    }
+
+    public void StopAllPlayers() 
+    {
         foreach (PlayerScript player in allPlayers)
         {
             player.enabled = false;
@@ -82,5 +98,22 @@ public class GameManager : MonoBehaviour
         {
             player.StartGame();
         }
+    }
+
+    public void OpenMainMenu() 
+    {
+        showLoading();
+        StartCoroutine(delayLoadScene("mainMenu"));
+    }
+
+    public IEnumerator delayLoadScene(string scene)
+    {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(scene);
+    }
+
+    public void showLoading()
+    {
+        Instantiate(loadingPanel);
     }
 }

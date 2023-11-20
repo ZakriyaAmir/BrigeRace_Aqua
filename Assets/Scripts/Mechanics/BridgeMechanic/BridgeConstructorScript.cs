@@ -34,6 +34,9 @@ public class BridgeConstructorScript : MonoBehaviour
                 if (bridgeIndexBiggest == 0 || bridgeIndexBiggest < int.Parse(hit.transform.gameObject.name))
                 {
                     bridgeIndexBiggest = int.Parse(hit.transform.gameObject.name);
+                    Debug.Log("Zak1 = " + bridgeIndexBiggest);
+                    Debug.Log("Zak2 = " + hit.transform.gameObject.name);
+                    Debug.Log("Zak3 = " + int.Parse(hit.transform.gameObject.name));
                     hit.transform.GetChild(0).GetComponentInChildren<BoxCollider>().enabled = false;
                 }
                 else if(bridgeIndexBiggest > int.Parse(hit.transform.gameObject.name))

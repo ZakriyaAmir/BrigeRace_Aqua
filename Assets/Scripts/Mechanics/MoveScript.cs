@@ -20,6 +20,8 @@ public class MoveScript : MonoBehaviour
 
     private void Start()
     {
+        joystick = FindObjectOfType<FixedJoystick>();
+        FindObjectOfType<CameraFollow>().target = transform;
         splash2.Stop();
         onFloor = true;
     }

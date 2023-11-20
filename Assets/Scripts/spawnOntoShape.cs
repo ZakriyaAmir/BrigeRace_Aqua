@@ -13,7 +13,7 @@ public class spawnOntoShape : MonoBehaviour
     private MeshCollider meshCollider;
     private MeshFilter meshFilter;
 
-    void Start()
+    void Awake()
     {
         // Get the mesh collider or filter from the 3D model
         meshCollider = GetComponent<MeshCollider>();
@@ -39,7 +39,7 @@ public class spawnOntoShape : MonoBehaviour
                 {
                     randomPosition = new Vector3(
                     Random.Range(bounds.min.x, bounds.max.x),
-                    0 - 0.3f,
+                    0 + 2.3f,
                     Random.Range(bounds.min.z, bounds.max.z)
                     );
 
@@ -66,7 +66,7 @@ public class spawnOntoShape : MonoBehaviour
         {
             randomPosition = new Vector3(
             Random.Range(bounds.min.x, bounds.max.x),
-            0 - 0.3f,
+            0 + 2.3f,
             Random.Range(bounds.min.z, bounds.max.z)
             );
 

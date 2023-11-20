@@ -16,7 +16,6 @@ public class WinnerHandler : MonoBehaviour
 
     void AnnounceWinner(Collider other)
     {
-        FindObjectOfType<CharacterController>().enabled = false; 
         if (other.GetComponent<PlayerScript>().isAI)
         {
             GameManager.instance.ShowLosePanel("You Lose!");
@@ -27,5 +26,7 @@ public class WinnerHandler : MonoBehaviour
         }
         Debug.Log("Winner is " + other.gameObject.name);
         gameObject.GetComponent<Collider>().enabled = false;
+
+        GameManager.instance.StopAllPlayers();
     }
 }

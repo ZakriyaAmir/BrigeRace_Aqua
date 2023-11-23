@@ -1491,7 +1491,7 @@ MonoBehaviour:
   levelPrefab: {fileID: 4201622400015498863, guid: 06a71ae17fb76ad4ba048c49815c22ed, type: 3}
   levelsParent: {fileID: 478844817}
   selectedLevel: 0
-  maxLevels: 45
+  maxLevels: 5
   vibrationToggle: {fileID: 234005753}
   soundToggle: {fileID: 40947825}
   vibrationBool: 0
@@ -1832,6 +1832,60 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 484787381}
   m_CullTransparentMesh: 1
+--- !u!1 &490000693
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 490000695}
+  - component: {fileID: 490000694}
+  m_Layer: 0
+  m_Name: audioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &490000694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490000693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed60b3d879fab3e488f50cea49cd50ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioFiles:
+  - name: start
+    sound: {fileID: 8300000, guid: 61e7ca61d547e874287140afcec3a227, type: 3}
+  - name: fail
+    sound: {fileID: 8300000, guid: 87142c5e939a9ea4b8cacdb8d54626e7, type: 3}
+  - name: win
+    sound: {fileID: 8300000, guid: 1c811a5ec8b9d7842821f63803ce6b81, type: 3}
+  audioPrefab: {fileID: 7201702012543614581, guid: c9e219414e1d4e3408427705fb23858f, type: 3}
+  vibrationBool: 0
+  soundBool: 0
+--- !u!4 &490000695
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490000693}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.55, y: 8.87, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &499681470
 GameObject:
   m_ObjectHideFlags: 0
@@ -6695,3 +6749,4 @@ SceneRoots:
   - {fileID: 1503268256}
   - {fileID: 467945622}
   - {fileID: 863632016}
+  - {fileID: 490000695}

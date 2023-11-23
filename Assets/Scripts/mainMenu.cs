@@ -19,8 +19,6 @@ public class mainMenu : MonoBehaviour
     public int maxLevels;
     public GameObject vibrationToggle;
     public GameObject soundToggle;
-    public bool vibrationBool;
-    public bool soundBool;
     private FirebaseApp app;
 
     private void Awake()
@@ -33,10 +31,10 @@ public class mainMenu : MonoBehaviour
 
     private void Start()
     {
-        checklevels();
-
         checkVibration();
         checkSound();
+
+        checklevels();
     }
 
     public void openLevelPanel() 
@@ -79,42 +77,37 @@ public class mainMenu : MonoBehaviour
         levelsParent.GetChild(levelIndex).GetChild(0).GetChild(1).gameObject.SetActive(true);
     }
 
-    public void checkSettings()
-    {
-        
-    }
-
     public void checkVibration() 
     {
-        if (PlayerPrefs.GetInt("vibration", 0) == 1)
+        if (PlayerPrefs.GetInt("vibration", 1) == 1)
         {
             vibrationToggle.SetActive(true);
-            vibrationBool = true;
+            audioManager.instance.vibrationBool = true;
         }
         else 
         {
             vibrationToggle.SetActive(false);
-            vibrationBool = false;
+            audioManager.instance.vibrationBool = false;
         }
     }
 
     public void checkSound()
     {
-        if (PlayerPrefs.GetInt("sound", 0) == 1)
+        if (PlayerPrefs.GetInt("sound", 1) == 1)
         {
             soundToggle.SetActive(true);
-            soundBool = true;
+            audioManager.instance.soundBool = true;
         }
         else
         {
             soundToggle.SetActive(false);
-            soundBool = false;
+            audioManager.instance.soundBool = false;
         }
     }
 
     public void ToggleVibration() 
     {
-        if (PlayerPrefs.GetInt("vibration", 0) == 1)
+        if (PlayerPrefs.GetInt("vibration", 1) == 1)
         {
             PlayerPrefs.SetInt("vibration", 0);
         }
@@ -127,7 +120,7 @@ public class mainMenu : MonoBehaviour
 
     public void ToggleSound()
     {
-        if (PlayerPrefs.GetInt("sound", 0) == 1)
+        if (PlayerPrefs.GetInt("sound", 1) == 1)
         {
             PlayerPrefs.SetInt("sound", 0);
         }
@@ -138,21 +131,29 @@ public class mainMenu : MonoBehaviour
         checkSound();
     }
 
-    public void checklevels() 
+    public void checklevels()
     {
-        selectedLevel = PlayerPrefs.GetInt("levelsCompleted", 0);
+        if (PlayerPrefs.GetInt("levelsCompleted", 0) < maxLevels)
+        {
+            selectedLevel = PlayerPrefs.GetInt("levelsCompleted", 0);
+        }
+        else 
+        {
+            selectedLevel = maxLevels - 1;
+        }
+
         for (int i = 0; i < maxLevels; i++) 
         {
             GameObject level = Instantiate(levelPrefab, levelsParent);
             level.GetComponent<levelUIScript>().levelID = i;
 
-            if (PlayerPrefs.GetInt("levelsCompleted", 0) > i)
+            if (selectedLevel > i)
             {
                 level.transform.GetChild(0).GetComponent<Button>().enabled = true;
                 level.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
                 level.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
             }
-            else if (PlayerPrefs.GetInt("levelsCompleted", 0) == i) 
+            else if (selectedLevel == i) 
             {
                 level.transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
             }

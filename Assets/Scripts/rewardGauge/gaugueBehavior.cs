@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Security.Claims;
 
 public class gaugueBehavior : MonoBehaviour
 {
@@ -12,29 +13,35 @@ public class gaugueBehavior : MonoBehaviour
     public int finalAmount;
     public TMP_Text amountText;
     public Button claimBtn;
+    public bool claimed;
 
     private void Start()
     {
         gaugeAnim = GetComponent<Animator>();
-        actualPrize = 1000;
+        actualPrize = GameManager.instance.totalEarnings;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        finalAmount = rewardMultiplier * actualPrize;
-        amountText.text = finalAmount.ToString();
+        if (!claimed)
+        {
+            finalAmount = rewardMultiplier * actualPrize;
+            amountText.text = finalAmount.ToString();
+        }
     }
 
     public void claimReward()
     {
-        gaugeAnim.enabled = false;
-        claimBtn.interactable = false;
-        Debug.Log("Reward Multiplier = " + finalAmount.ToString());
         //Play Reward Ad here
+        claimed = true;
+        grantReward();
     }
 
     public void grantReward() 
     {
-         
+        GameManager.instance.totalEarnings = finalAmount;
+        GameManager.instance.winScore.text = finalAmount.ToString();
+        gaugeAnim.enabled = false;
+        claimBtn.interactable = false;
     }
 }

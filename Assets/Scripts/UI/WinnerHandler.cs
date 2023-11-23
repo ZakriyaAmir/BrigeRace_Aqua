@@ -18,13 +18,12 @@ public class WinnerHandler : MonoBehaviour
     {
         if (other.GetComponent<PlayerScript>().isAI)
         {
-            GameManager.instance.ShowLosePanel("You Lose!");
+            GameManager.instance.ShowLosePanel("You have failed to finish first!");
         }
         else 
         {
             GameManager.instance.ShowWinPanel("You Win!");
         }
-        Debug.Log("Winner is " + other.gameObject.name);
         gameObject.GetComponent<Collider>().enabled = false;
 
         GameManager.instance.StopAllPlayers();

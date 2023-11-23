@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
+using static GameManager;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +20,11 @@ public class GameManager : MonoBehaviour
     public GameObject[] enemyPrefabs;
     public levelBehavior currentLevel;
     public GameObject loadingPanel;
+    public int totalBricksCollected;
+    public int totalEarnings;
+    public TMP_Text winScore;
+    public TMP_Text loseMessage;
+    public TMP_Text winMessage;
 
     public static GameManager instance;
 
@@ -34,6 +41,14 @@ public class GameManager : MonoBehaviour
             instance = this;
         }
         player = Instantiate(playerPrefabs[PlayerPrefs.GetInt("selectedPlayer", 0)]);
+
+        //Reset current level if the total levels count exceeds
+        if (PlayerPrefs.GetInt("currentLevel", 0) >= allLevels.Length) 
+        {
+            Debug.Log("Levels Reset");
+            PlayerPrefs.SetInt("currentLevel", 0);
+        }
+
         currentLevel = Instantiate(allLevels[PlayerPrefs.GetInt("currentLevel", 0)]).GetComponent<levelBehavior>();
         //Spawn all enemies
         for (int i = 0; i < currentLevel.totalEnemies; i++) 
@@ -90,14 +105,23 @@ public class GameManager : MonoBehaviour
     {
         if (player.transform.position.y < -15)
         {
-            losePanel.SetActive(true);
+            ShowLosePanel("You Fell!");
         }
     }
 
     public void ShowWinPanel(string winText)
     {
-        winPanel.SetActive(true);
+        if (audioManager.instance.vibrationBool) 
+        {
+            Handheld.Vibrate();
+        }
 
+        audioManager.instance.PlayAudio("win", true, Vector3.zero);
+
+        winPanel.SetActive(true);
+        //winMessage.text = winText;
+        totalEarnings = totalBricksCollected * 10;
+        winScore.text = totalEarnings .ToString();
         //Save win progress
         if (PlayerPrefs.GetInt("levelsCompleted", 0) <= PlayerPrefs.GetInt("currentLevel", 0)) 
         {
@@ -107,16 +131,32 @@ public class GameManager : MonoBehaviour
 
     public void ShowLosePanel(string loseText)
     {
+        if (audioManager.instance.vibrationBool)
+        {
+            Handheld.Vibrate();
+        }
+
+        audioManager.instance.PlayAudio("fail", true, Vector3.zero);
+
+
+        loseMessage.text = loseText;
         winPanel.SetActive(false);
         losePanel.SetActive(true);
     }
 
     public void StartTheGame()
     {
+        if (audioManager.instance.vibrationBool)
+        {
+            Handheld.Vibrate();
+        }
+
         foreach (PlayerScript player in allPlayers)
         {
             player.StartGame();
         }
+
+        audioManager.instance.PlayAudio("start", true, Vector3.zero);
     }
 
     public void restartLevel()

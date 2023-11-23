@@ -10,12 +10,31 @@ public class StackManager : MonoBehaviour
     [SerializeField] private float stackXposition = -0.18f;
 
     [SerializeField] List<GameObject> bricks = new List<GameObject>();
+    private bool isPlayer;
+
+    private void Start()
+    {
+        if (GetComponent<PlayerScript>().isAI)
+        {
+            isPlayer = false;
+        }
+        else
+        {
+            isPlayer = true;
+        }
+    }
 
     public void Push(GameObject collectedBrick)
     {
         bricks.Add(collectedBrick);
         MoveToStackAnim(collectedBrick);
+
+        if (isPlayer) 
+        {
+            GameManager.instance.totalBricksCollected++;
+        }
     }
+        
 
     public void Pop()
     {

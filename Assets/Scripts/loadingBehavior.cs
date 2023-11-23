@@ -7,6 +7,7 @@ public class loadingBehavior : MonoBehaviour
 {
     public Animator anim;
     public Image loadingBar;
+    public RectTransform fishIco;
 
     private void Awake()
     {
@@ -43,6 +44,11 @@ public class loadingBehavior : MonoBehaviour
         {
             timer += Time.deltaTime;
             loadingBar.fillAmount = Mathf.Lerp(startFill, endFill, timer / fillDuration);
+            if (fishIco.localPosition.x < 625) 
+            {
+                float xVal = Mathf.Lerp(0, 625, timer / fillDuration);
+                fishIco.anchoredPosition = new Vector2(xVal, fishIco.anchoredPosition.y);
+            }
             yield return null;
         }
 

@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 2346171789987012898}
   - component: {fileID: 1430843847656244991}
   - component: {fileID: 7781309516986155076}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Round_Border (1)
-  m_TagString: Untagged
+  m_TagString: border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -188,7 +188,7 @@ MonoBehaviour:
   spawnCountPerObject: 15
   avoidanceLayer:
     serializedVersion: 2
-    m_Bits: 384
+    m_Bits: 896
   bricksParent: {fileID: 512260268045149780}
 --- !u!1 &2063280651597836098
 GameObject:
@@ -399,9 +399,9 @@ GameObject:
   - component: {fileID: 1702106829997142784}
   - component: {fileID: 4072666090671089842}
   - component: {fileID: 8279069628725880066}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Border2 (1)
-  m_TagString: Untagged
+  m_TagString: border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -700,7 +700,7 @@ GameObject:
   - component: {fileID: 4369666340058536500}
   m_Layer: 6
   m_Name: base_1
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -895,9 +895,9 @@ GameObject:
   - component: {fileID: 1373210227576273088}
   - component: {fileID: 9191507872424859472}
   - component: {fileID: 1450927369754057522}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Round_Border1 (1)
-  m_TagString: Untagged
+  m_TagString: border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1139,9 +1139,9 @@ GameObject:
   - component: {fileID: 7516041646233027028}
   - component: {fileID: 7223322110336370114}
   - component: {fileID: 7084555107075235241}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Border4 (3)
-  m_TagString: Untagged
+  m_TagString: border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

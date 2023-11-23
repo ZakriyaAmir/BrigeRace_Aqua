@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "30069534565",
+    "firebase_url": "https://fishbridge-bdf52-default-rtdb.firebaseio.com",
+    "project_id": "fishbridge-bdf52",
+    "storage_bucket": "fishbridge-bdf52.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:30069534565:android:9294e7eae685689404bb8c",
+        "android_client_info": {
+          "package_name": "com.mobinators.fishbridge"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeEwutLPDjoEGGOiw47y-7MV0aEX79jCA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

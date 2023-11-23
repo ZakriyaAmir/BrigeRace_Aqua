@@ -10,7 +10,7 @@ public class AIController : MonoBehaviour
     private Animator animator;
     private NavMeshAgent agent;
     private PlayerScript playerScript;
-    [SerializeField] private bool haveTarget = false;
+    [SerializeField] public bool haveTarget = false;
 
     public Vector3 targetTransform;
     public GameObject currentlyStandingFloor;

@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 {
     public GameObject winPanel;
     public GameObject losePanel;
+    public GameObject pausePanel;
     public GameObject player;
     public PlayerScript[] allPlayers;
     public levelBehavior[] allLevels;
@@ -48,6 +49,19 @@ public class GameManager : MonoBehaviour
         currentLevel.AssignUniqueSpawnPositions();
     }
 
+    public void pauseGame() 
+    {
+        pausePanel.SetActive(true);
+        pausePanel.GetComponent<Animator>().SetBool("show",true);
+        StopAllPlayers();
+    }
+
+    public void unPauseGame()
+    {
+        pausePanel.GetComponent<Animator>().SetBool("show", false);
+        StartTheGame();
+    }
+
     public void StopAllPlayers() 
     {
         foreach (PlayerScript player in allPlayers)
@@ -58,6 +72,7 @@ public class GameManager : MonoBehaviour
                 player.GetComponent<NavMeshAgent>().enabled = false;
                 player.GetComponent<Rigidbody>().isKinematic = true;
                 player.GetComponent<AIController>().enabled = false;
+                player.GetComponent<AIController>().haveTarget = false;
             }
             else
             {
@@ -81,13 +96,17 @@ public class GameManager : MonoBehaviour
 
     public void ShowWinPanel(string winText)
     {
-        winPanel.transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = winText;
         winPanel.SetActive(true);
+
+        //Save win progress
+        if (PlayerPrefs.GetInt("levelsCompleted", 0) <= PlayerPrefs.GetInt("currentLevel", 0)) 
+        {
+            PlayerPrefs.SetInt("levelsCompleted", PlayerPrefs.GetInt("levelsCompleted", 0) + 1);
+        }
     }
 
     public void ShowLosePanel(string loseText)
     {
-        winPanel.transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = loseText;
         winPanel.SetActive(false);
         losePanel.SetActive(true);
     }
@@ -98,6 +117,19 @@ public class GameManager : MonoBehaviour
         {
             player.StartGame();
         }
+    }
+
+    public void restartLevel()
+    {
+        showLoading();
+        StartCoroutine(delayLoadScene("gameplay"));
+    }
+
+    public void playNextLevel()
+    {
+        showLoading();
+        PlayerPrefs.SetInt("currentLevel", PlayerPrefs.GetInt("currentLevel", 0) + 1);
+        StartCoroutine(delayLoadScene("gameplay"));
     }
 
     public void OpenMainMenu() 

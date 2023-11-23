@@ -321,7 +321,7 @@ GameObject:
   - component: {fileID: 125505631381429048}
   m_Layer: 6
   m_Name: base
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647

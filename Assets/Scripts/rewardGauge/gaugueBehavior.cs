@@ -43,5 +43,6 @@ public class gaugueBehavior : MonoBehaviour
         GameManager.instance.winScore.text = finalAmount.ToString();
         gaugeAnim.enabled = false;
         claimBtn.interactable = false;
+        GameManager.instance.claimLevelReward();
     }
 }

@@ -15,5 +15,6 @@ public class UIHandler : MonoBehaviour
     {
         tapToStartPanel.SetActive(false);
         GameManager.instance.StartTheGame();
+        PlayerPrefs.SetInt("tutorial", 0);
     }
 }

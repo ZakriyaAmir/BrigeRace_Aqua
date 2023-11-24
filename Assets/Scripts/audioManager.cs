@@ -12,6 +12,8 @@ public class audioManager : MonoBehaviour
     public bool vibrationBool;
     public bool soundBool;
 
+    public GameObject CurrentMusicObject;
+
     public static audioManager instance;
 
     [Serializable]
@@ -47,13 +49,23 @@ public class audioManager : MonoBehaviour
         audioFile audio = audioFiles.Find(file => file.name == soundName);
 
         //Spawn an audio object prefab
-        GameObject audioObj = Instantiate(audioPrefab);
+        GameObject audioObj = Instantiate(audioPrefab,transform);
         audioObj.GetComponent<audioSourceBehavior>().destroyOnComplete = destroyable;
+        
+        //Only play one music playback at a time
+        if (!destroyable) 
+        {
+            if (CurrentMusicObject != null) 
+            {
+                Destroy(CurrentMusicObject);
+            }
+            CurrentMusicObject = audioObj;
+        }
+
         audioObj.GetComponent<audioSourceBehavior>().spawnTarget = spawnPosition;
 
         if (audio != null)
         {
-            Debug.Log("Zak = " + audio.sound);
             audioObj.GetComponent<audioSourceBehavior>().clip = audio.sound;
         }
         else
@@ -71,6 +83,37 @@ public class audioManager : MonoBehaviour
         else
         {
             vibrationBool = false;
+        }
+    }
+
+    public void changeSoundVolume(float newVal) 
+    {
+        PlayerPrefs.SetFloat("soundVolume", newVal);
+    }
+
+    public void changeMusicVolume(float newVal)
+    {
+        PlayerPrefs.SetFloat("musicVolume", newVal);
+
+        if (CurrentMusicObject != null)
+        {
+            CurrentMusicObject.GetComponent<AudioSource>().volume = newVal;
+        }
+    }
+
+    public void stopMusic() 
+    {
+        if (CurrentMusicObject != null)
+        {
+            CurrentMusicObject.GetComponent<AudioSource>().Stop();
+        }
+    }
+    
+    public void resumeMusic() 
+    {
+        if (CurrentMusicObject != null)
+        {
+            CurrentMusicObject.GetComponent<AudioSource>().Play();
         }
     }
 

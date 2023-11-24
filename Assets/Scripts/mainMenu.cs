@@ -15,6 +15,7 @@ public class mainMenu : MonoBehaviour
     public GameObject loadingPanel;
     public GameObject levelPrefab;
     public Transform levelsParent;
+    public TMP_Text totalMoney;
     public int selectedLevel;
     public int maxLevels;
     public GameObject vibrationToggle;
@@ -35,6 +36,9 @@ public class mainMenu : MonoBehaviour
         checkSound();
 
         checklevels();
+        totalMoney.text = economyManager.Instance.money.ToString();
+
+        audioManager.instance.PlayAudio("menuBGM", false, Vector3.zero);
     }
 
     public void openLevelPanel() 
@@ -123,10 +127,21 @@ public class mainMenu : MonoBehaviour
         if (PlayerPrefs.GetInt("sound", 1) == 1)
         {
             PlayerPrefs.SetInt("sound", 0);
+            audioManager.instance.stopMusic();
         }
         else
         {
             PlayerPrefs.SetInt("sound", 1);
+
+            checkSound();
+            if (audioManager.instance.CurrentMusicObject != null)
+            {
+                audioManager.instance.resumeMusic();
+            }
+            else 
+            {
+                audioManager.instance.PlayAudio("menuBGM", false, Vector3.zero);
+            }
         }
         checkSound();
     }

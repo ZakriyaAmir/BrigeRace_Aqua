@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public GameObject winPanel;
     public GameObject losePanel;
     public GameObject pausePanel;
+    public GameObject tutorialPanel;
     public GameObject player;
     public PlayerScript[] allPlayers;
     public levelBehavior[] allLevels;
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
     public TMP_Text winScore;
     public TMP_Text loseMessage;
     public TMP_Text winMessage;
+    public bool gameOver;
 
     public static GameManager instance;
 
@@ -57,11 +59,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void claimLevelReward() 
+    {
+        economyManager.Instance.addMoney(totalEarnings);
+    }
+
     private void Start()
     {
         allPlayers = FindObjectsOfType<PlayerScript>();
         StopAllPlayers();
         currentLevel.AssignUniqueSpawnPositions();
+
+        audioManager.instance.PlayAudio("gameplayBGM", false, Vector3.zero);
+
+        if (PlayerPrefs.GetInt("tutorial", 1) == 1)
+        {
+            tutorialPanel.SetActive(true);
+        }
     }
 
     public void pauseGame() 
@@ -103,7 +117,7 @@ public class GameManager : MonoBehaviour
 
     void ShowLosePanelIfFall()
     {
-        if (player.transform.position.y < -15)
+        if (player.transform.position.y < -15 && !gameOver)
         {
             ShowLosePanel("You Fell!");
         }
@@ -131,6 +145,8 @@ public class GameManager : MonoBehaviour
 
     public void ShowLosePanel(string loseText)
     {
+        gameOver = true;
+
         if (audioManager.instance.vibrationBool)
         {
             Handheld.Vibrate();

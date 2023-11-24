@@ -18,12 +18,22 @@ public class audioSourceBehavior : MonoBehaviour
         }
 
         audioSource.clip = clip;
-        audioSource.Play();
 
         if (destroyOnComplete)
         {
+            //Sound Type
             StartCoroutine(DestroyGameObjectAfterAudioPlayback());
+            audioSource.volume = PlayerPrefs.GetFloat("soundVolume", 1f);
+            audioSource.loop = false;
         }
+        else 
+        {
+            //BGM Type
+            audioSource.volume = PlayerPrefs.GetFloat("musicVolume", 1f);
+            audioSource.loop = true;
+        }
+
+        audioSource.Play();
     }
 
     private IEnumerator DestroyGameObjectAfterAudioPlayback()

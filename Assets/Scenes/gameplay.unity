@@ -23,7 +23,7 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1
+  m_AmbientIntensity: 1.21
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.13296545, g: 0.19145328, b: 0.33962262, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 119ec07f1c7ed204db46bd8465fd5a50, type: 2}
@@ -497,41 +497,17 @@ MonoBehaviour:
   - {fileID: 7632836937746813515, guid: 24542b74eff1a234595825b0ee57c04d, type: 3}
   - {fileID: 7632836937746813515, guid: 1f89e72aad3f59d429f6c8a92ab8b966, type: 3}
   - {fileID: 5941201575095710340, guid: e774ca58438fb544f9cfc5ab55e27e17, type: 3}
-  - {fileID: 7632836937746813515, guid: cb33d73f8c888304d947ea023cf13460, type: 3}
-  - {fileID: 7632836937746813515, guid: cb33d73f8c888304d947ea023cf13460, type: 3}
-  - {fileID: 7632836937746813515, guid: cb33d73f8c888304d947ea023cf13460, type: 3}
-  - {fileID: 7632836937746813515, guid: cb33d73f8c888304d947ea023cf13460, type: 3}
-  - {fileID: 7632836937746813515, guid: cb33d73f8c888304d947ea023cf13460, type: 3}
-  - {fileID: 7632836937746813515, guid: cb33d73f8c888304d947ea023cf13460, type: 3}
-  - {fileID: 7632836937746813515, guid: cb33d73f8c888304d947ea023cf13460, type: 3}
-  - {fileID: 7632836937746813515, guid: cb33d73f8c888304d947ea023cf13460, type: 3}
-  - {fileID: 7632836937746813515, guid: cb33d73f8c888304d947ea023cf13460, type: 3}
-  - {fileID: 7632836937746813515, guid: cb33d73f8c888304d947ea023cf13460, type: 3}
-  - {fileID: 7632836937746813515, guid: cb33d73f8c888304d947ea023cf13460, type: 3}
-  - {fileID: 7632836937746813515, guid: cb33d73f8c888304d947ea023cf13460, type: 3}
-  - {fileID: 7632836937746813515, guid: cb33d73f8c888304d947ea023cf13460, type: 3}
-  - {fileID: 7632836937746813515, guid: cb33d73f8c888304d947ea023cf13460, type: 3}
-  - {fileID: 7632836937746813515, guid: cb33d73f8c888304d947ea023cf13460, type: 3}
-  - {fileID: 7632836937746813515, guid: cb33d73f8c888304d947ea023cf13460, type: 3}
-  - {fileID: 7632836937746813515, guid: cb33d73f8c888304d947ea023cf13460, type: 3}
-  - {fileID: 7632836937746813515, guid: cb33d73f8c888304d947ea023cf13460, type: 3}
-  - {fileID: 7632836937746813515, guid: cb33d73f8c888304d947ea023cf13460, type: 3}
-  - {fileID: 7632836937746813515, guid: cb33d73f8c888304d947ea023cf13460, type: 3}
-  - {fileID: 7632836937746813515, guid: cb33d73f8c888304d947ea023cf13460, type: 3}
-  - {fileID: 7632836937746813515, guid: cb33d73f8c888304d947ea023cf13460, type: 3}
-  - {fileID: 7632836937746813515, guid: cb33d73f8c888304d947ea023cf13460, type: 3}
-  - {fileID: 7632836937746813515, guid: cb33d73f8c888304d947ea023cf13460, type: 3}
-  - {fileID: 7632836937746813515, guid: cb33d73f8c888304d947ea023cf13460, type: 3}
-  - {fileID: 7632836937746813515, guid: cb33d73f8c888304d947ea023cf13460, type: 3}
-  - {fileID: 7632836937746813515, guid: cb33d73f8c888304d947ea023cf13460, type: 3}
-  - {fileID: 7632836937746813515, guid: cb33d73f8c888304d947ea023cf13460, type: 3}
-  - {fileID: 7632836937746813515, guid: cb33d73f8c888304d947ea023cf13460, type: 3}
-  - {fileID: 7632836937746813515, guid: cb33d73f8c888304d947ea023cf13460, type: 3}
-  - {fileID: 7632836937746813515, guid: cb33d73f8c888304d947ea023cf13460, type: 3}
-  - {fileID: 7632836937746813515, guid: cb33d73f8c888304d947ea023cf13460, type: 3}
-  - {fileID: 7632836937746813515, guid: cb33d73f8c888304d947ea023cf13460, type: 3}
-  - {fileID: 7632836937746813515, guid: cb33d73f8c888304d947ea023cf13460, type: 3}
-  - {fileID: 7632836937746813515, guid: cb33d73f8c888304d947ea023cf13460, type: 3}
+  - {fileID: 5941201575095710340, guid: 7d78c2b16a8fb41448704af94d4b1333, type: 3}
+  - {fileID: 5941201575095710340, guid: 0876b2131c754b144bf902040acf13a5, type: 3}
+  - {fileID: 7632836937746813515, guid: 9535ee51a593ca448bddca0988482708, type: 3}
+  - {fileID: 5941201575095710340, guid: c9b604916281dff438c8de5ac75271df, type: 3}
+  - {fileID: 7632836937746813515, guid: 976753a490ae023428bab0abaaa05f1c, type: 3}
+  - {fileID: 5941201575095710340, guid: b3f777991d3036f4aa84b409b5f1a2d0, type: 3}
+  - {fileID: 5941201575095710340, guid: 72694b3b18abf484191c79dc7d941ccf, type: 3}
+  - {fileID: 7632836937746813515, guid: c8825119c53d5ab43a971a22ed244678, type: 3}
+  - {fileID: 7632836937746813515, guid: f01128b469f150c4ca3fe7506a97ff4b, type: 3}
+  - {fileID: 586511358155055337, guid: 829844bf7e1c2eb4d8c1b8f9c7cb0f02, type: 3}
+  - {fileID: 5941201575095710340, guid: e1fc3a35726d3754e9418c028e63df6f, type: 3}
   playerPrefabs:
   - {fileID: 4903852709055638812, guid: 47a1ae7d75a3c2448ab46abf4f126407, type: 3}
   enemyPrefabs:
@@ -543,6 +519,7 @@ MonoBehaviour:
   winScore: {fileID: 619839111}
   loseMessage: {fileID: 1794109442}
   winMessage: {fileID: 0}
+  gameOver: 0
 --- !u!1 &584015308
 GameObject:
   m_ObjectHideFlags: 0
@@ -2220,7 +2197,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 2
+  m_Intensity: 3
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.802082

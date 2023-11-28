@@ -32,6 +32,7 @@ public class StackManager : MonoBehaviour
         if (isPlayer) 
         {
             GameManager.instance.totalBricksCollected++;
+            audioManager.instance.PlayAudio("pick", true, Vector3.zero);
         }
     }
         

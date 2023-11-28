@@ -50,13 +50,17 @@ public class BridgeConstructorScript : MonoBehaviour
                     {
                         hit.transform.gameObject.GetComponent<BridgeTileScript>().ColorBrick(playerScript.playerColorIndex);
                         stackManager.Pop();
+                        if (!playerScript.isAI)
+                        {
+                            audioManager.instance.PlayAudio("drop", true, Vector3.zero);
+                        }
                     }
                 }
                 else
                 {
                     if (playerScript.isAI)
                     {
-                        player.GetComponent<AIController>().ClearTarget();
+                        //player.GetComponent<AIController>().ClearTarget();
                         StartCoroutine(player.GetComponent<AIController>().GetTargets());
                     }
                     else

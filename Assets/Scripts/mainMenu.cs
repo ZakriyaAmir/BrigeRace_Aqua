@@ -27,7 +27,7 @@ public class mainMenu : MonoBehaviour
         Application.targetFrameRate = 120;
         mainPanel.SetActive(true);
 
-        //PlayerPrefs.SetInt("levelsCompleted", 14);
+       //PlayerPrefs.SetInt("levelsCompleted", 50);
     }
 
     private void Start()

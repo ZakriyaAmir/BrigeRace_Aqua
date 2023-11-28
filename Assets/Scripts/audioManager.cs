@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using static GameManager;
 
 public class audioManager : MonoBehaviour
@@ -126,6 +129,19 @@ public class audioManager : MonoBehaviour
         else
         {
             soundBool = false;
+        }
+    }
+
+    void Update()
+    {
+        // Check if the left mouse button is clicked
+        if (Input.GetMouseButtonDown(0))
+        {
+            // Check if the current selected game object is a UI button
+            if (EventSystem.current.currentSelectedGameObject != null && EventSystem.current.currentSelectedGameObject.CompareTag("Button"))
+            {
+                PlayAudio("click", true, Vector3.zero);
+            }
         }
     }
 }

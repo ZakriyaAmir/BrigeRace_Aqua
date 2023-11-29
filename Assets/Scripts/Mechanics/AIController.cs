@@ -7,7 +7,6 @@ public class AIController : MonoBehaviour
 {
     [SerializeField] List<GameObject> targets = new List<GameObject>();
 
-    private Animator animator;
     private NavMeshAgent agent;
     private PlayerScript playerScript;
     [SerializeField] public bool haveTarget = false;
@@ -22,7 +21,6 @@ public class AIController : MonoBehaviour
     void Start()
     {
         playerScript = GetComponent<PlayerScript>();
-        animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
 
@@ -42,7 +40,7 @@ public class AIController : MonoBehaviour
     public IEnumerator GetTargets()
     {
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         if (targets.Count == 0)
         {
             while (brickSpawnContainer == null)
@@ -83,7 +81,6 @@ public class AIController : MonoBehaviour
             // move to target
             targetTransform = targets[0].gameObject.transform.position;
             agent.SetDestination(targetTransform);
-            animator.SetBool("Running", true);
             haveTarget = true;
         }
         else if (!haveTarget && targets.Count == 0 && gameObject.GetComponent<StackManager>().isPopable())

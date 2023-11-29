@@ -8,7 +8,6 @@ using UnityEngine.EventSystems;
 public class MoveScript : MonoBehaviour
 {
     [SerializeField] private FixedJoystick joystick;
-    [SerializeField] private Animator animator;
     [SerializeField] public CharacterController controller;
     [SerializeField] private float moveSpeed = 6f;
 
@@ -44,7 +43,6 @@ public class MoveScript : MonoBehaviour
 
             if (direction.magnitude >= 0.1f)
             {
-                animator.SetBool("Running", true);
                 float targetAngle = Mathf.Atan2(-direction.x, -direction.z) * Mathf.Rad2Deg;
                 transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
                 if (onFloor)
@@ -54,7 +52,6 @@ public class MoveScript : MonoBehaviour
             }
             else
             {
-                animator.SetBool("Running", false);
                 splash2.Stop();
             }
         }
@@ -78,10 +75,5 @@ public class MoveScript : MonoBehaviour
             splash2.Stop();
             onFloor = false;
         }
-    }
-
-    void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-
     }
 }

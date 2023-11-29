@@ -60,7 +60,7 @@ public class BridgeConstructorScript : MonoBehaviour
                 {
                     if (playerScript.isAI)
                     {
-                        //player.GetComponent<AIController>().ClearTarget();
+                        player.GetComponent<AIController>().ClearTarget();
                         StartCoroutine(player.GetComponent<AIController>().GetTargets());
                     }
                     else

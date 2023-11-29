@@ -85,13 +85,10 @@ public class GameManager : MonoBehaviour
     {
         // Assuming you have a variable called "currentLevel" that represents the current level
         int currentLevel = PlayerPrefs.GetInt("currentLevel", 0);
-        Debug.Log("Zak0 = " + currentLevel);
         // Calculate the index of the skybox based on the current level
         int skyboxIndex = currentLevel / 10; // Assuming each range of 10 levels corresponds to one skybox
-        Debug.Log("Zak1 = " + skyboxIndex);
         // Ensure the skyboxIndex is within the valid range
         skyboxIndex = Mathf.Clamp(skyboxIndex, 0, skyboxMaterials.Count - 1);
-        Debug.Log("Zak2 = " + skyboxIndex);
         // Assign the selected skybox to the RenderSettings
         RenderSettings.skybox = skyboxMaterials[skyboxIndex];
     }

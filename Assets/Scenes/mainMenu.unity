@@ -558,7 +558,7 @@ GameObject:
   - component: {fileID: 434382272}
   - component: {fileID: 434382271}
   m_Layer: 5
-  m_Name: privacy
+  m_Name: moreApps
   m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -627,16 +627,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 467945621}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 467945623}
+        m_TargetAssemblyTypeName: mainMenu, Assembly-CSharp
+        m_MethodName: OpenURL
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: www.google.com
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &434382272
@@ -2120,6 +2120,10 @@ PrefabInstance:
     - target: {fileID: 1473798443534734330, guid: d0d0c30ece6ebe94d8a7e16b2b843bc1, type: 3}
       propertyPath: admobRewarded
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1473798443534734330, guid: d0d0c30ece6ebe94d8a7e16b2b843bc1, type: 3}
+      propertyPath: AdmobBannerUnitId
+      value: ca-app-pub-3940256099942544/6300978111
       objectReference: {fileID: 0}
     - target: {fileID: 1473798443534734330, guid: d0d0c30ece6ebe94d8a7e16b2b843bc1, type: 3}
       propertyPath: admobInterstitial
@@ -4371,7 +4375,7 @@ GameObject:
   - component: {fileID: 2087641640}
   - component: {fileID: 2087641639}
   m_Layer: 5
-  m_Name: moreGames
+  m_Name: rateUs
   m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4440,16 +4444,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 467945621}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 467945623}
+        m_TargetAssemblyTypeName: mainMenu, Assembly-CSharp
+        m_MethodName: OpenURL
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: www.google.com
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2087641640
@@ -4987,9 +4991,25 @@ PrefabInstance:
     m_TransformParent: {fileID: 1282139163}
     m_Modifications:
     - target: {fileID: 944825153506425270, guid: 57cf88f9be5ff204fac15f34554d709c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 944825153506425270, guid: 57cf88f9be5ff204fac15f34554d709c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 467945621}
+      objectReference: {fileID: 467945623}
+    - target: {fileID: 944825153506425270, guid: 57cf88f9be5ff204fac15f34554d709c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenURL
+      objectReference: {fileID: 0}
+    - target: {fileID: 944825153506425270, guid: 57cf88f9be5ff204fac15f34554d709c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: mainMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 944825153506425270, guid: 57cf88f9be5ff204fac15f34554d709c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: www.google.com
+      objectReference: {fileID: 0}
     - target: {fileID: 1404966292557447350, guid: 57cf88f9be5ff204fac15f34554d709c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5110,14 +5130,38 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Button
       objectReference: {fileID: 0}
+    - target: {fileID: 5500923700045399227, guid: 57cf88f9be5ff204fac15f34554d709c, type: 3}
+      propertyPath: m_text
+      value: Privacy Policy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5500923700045399227, guid: 57cf88f9be5ff204fac15f34554d709c, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 5714677356378475533, guid: 57cf88f9be5ff204fac15f34554d709c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 467945623}
     - target: {fileID: 8920043972111972573, guid: 57cf88f9be5ff204fac15f34554d709c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8920043972111972573, guid: 57cf88f9be5ff204fac15f34554d709c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 467945621}
+      objectReference: {fileID: 467945623}
+    - target: {fileID: 8920043972111972573, guid: 57cf88f9be5ff204fac15f34554d709c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenURL
+      objectReference: {fileID: 0}
+    - target: {fileID: 8920043972111972573, guid: 57cf88f9be5ff204fac15f34554d709c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: mainMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8920043972111972573, guid: 57cf88f9be5ff204fac15f34554d709c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: www.google.com
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

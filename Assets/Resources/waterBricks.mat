@@ -14,12 +14,8 @@ Material:
   m_ValidKeywords:
   - _ALPHAPREMULTIPLY_ON
   m_InvalidKeywords:
-  - _
-  - _CFXR_DITHERED_SHADOWS_OFF
-  - _CFXR_OVERLAYBLEND_RGBA
-  - _CFXR_OVERLAYTEX_OFF
-  - _GLOSSYREFLECTIONS_OFF
   - _RECEIVE_SHADOWS_OFF
+  - _SPECULAR_SETUP
   - _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 1
@@ -44,6 +40,14 @@ Material:
         m_Scale: {x: 3, y: 1.02}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ClearCoatMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cube:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -77,11 +81,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 0.4, y: 0.2}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 3, y: 1.02}
+        m_Texture: {fileID: 2800000, guid: 3f268c3e61ec39b419638281da1f78b6, type: 3}
+        m_Scale: {x: 0.4, y: 0.2}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
@@ -152,6 +156,7 @@ Material:
     - _CameraFadingEnabled: 0
     - _CameraFarFadeDistance: 2
     - _CameraNearFadeDistance: 1
+    - _ClearCoat: 0
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _ColorMask: 15
@@ -247,7 +252,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 0.6156863}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
     - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
-    - _Color: {r: 1.5157169, g: 1.5157169, b: 1.5157169, a: 0.2}
+    - _Color: {r: 1, g: 1, b: 1, a: 0.6156863}
     - _ColorAddSubDiff: {r: -1, g: 0, b: 0, a: 0}
     - _DissolveScroll: {r: 0, g: 0, b: 0, a: 0}
     - _DistortScrolling: {r: 0, g: 0, b: 1, a: 1}
@@ -255,10 +260,12 @@ Material:
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _HueVariation: {r: 1, g: 0.5, b: 0, a: 0.1}
     - _OverlayTex_Scroll: {r: 0.1, g: 0.1, b: 1, a: 1}
+    - _ReflectColor: {r: 1, g: 1, b: 1, a: 0.5}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _Specular: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &4047748157667041279
 MonoBehaviour:

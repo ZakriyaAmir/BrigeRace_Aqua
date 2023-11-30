@@ -32,7 +32,7 @@ public class mainMenu : MonoBehaviour
 
     private void Start()
     {
-        AdsManager.Instance.RunBannerAd();
+        AdsManager.Instance.Invoke("RunBannerAd",3f);
 
         checkVibration();
         checkSound();
@@ -45,8 +45,6 @@ public class mainMenu : MonoBehaviour
 
     public void openLevelPanel() 
     {
-        AdsManager.Instance.RunInterstitialAd();
-
         levelsPanel.SetActive(true);
         levelsPanel.GetComponent<Animator>().SetBool("show", true);
     }
@@ -61,6 +59,11 @@ public class mainMenu : MonoBehaviour
         PlayerPrefs.SetInt("currentLevel", selectedLevel);
         showLoading();
         StartCoroutine(delayLoadScene("gameplay"));
+    }
+
+    public void OpenURL(string url) 
+    {
+        Application.OpenURL(url);
     }
 
     public IEnumerator delayLoadScene(string scene)
@@ -128,6 +131,8 @@ public class mainMenu : MonoBehaviour
 
     public void ToggleSound()
     {
+        AdsManager.Instance.RunInterstitialAd();
+
         if (PlayerPrefs.GetInt("sound", 1) == 1)
         {
             PlayerPrefs.SetInt("sound", 0);

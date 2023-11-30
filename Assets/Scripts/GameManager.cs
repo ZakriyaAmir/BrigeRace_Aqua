@@ -68,6 +68,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        AdsManager.Instance.Invoke("RunBannerAd", 2f);
+
         allPlayers = FindObjectsOfType<PlayerScript>();
         StopAllPlayers();
         currentLevel.AssignUniqueSpawnPositions();

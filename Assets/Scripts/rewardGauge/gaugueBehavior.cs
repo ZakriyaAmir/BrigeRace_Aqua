@@ -33,12 +33,39 @@ public class gaugueBehavior : MonoBehaviour
     public void claimReward()
     {
         //Play Reward Ad here
+        //Initialize Admob reward callback in the script in which you are required to use rewarded ad for admob
+        AdsManager.Instance.RunRewardedAd(() => grantReward());
+        //Initialize Max reward callback in the script in which you are required to use rewarded ad for applovin
+        MaxSdkCallbacks.Rewarded.OnAdReceivedRewardEvent += OnRewardedAdReceivedRewardEvent;
+
         claimed = true;
+    }
+
+    public void getRewardInterstitial()
+    {
+        //Initialize Admob reward callback in the script in which you are required to use rewarded ad for admob
+        AdsManager.Instance.RunRewardedInterstitialAd(() => grantReward());
+        //Initialize Max reward callback in the script in which you are required to use rewarded ad for applovin
+        MaxSdkCallbacks.RewardedInterstitial.OnAdReceivedRewardEvent += OnRewardedInterstitialAdReceivedRewardEvent;
+    }
+
+    //Rewarded sample callback methods for Applovin Max
+    private void OnRewardedAdReceivedRewardEvent(string adUnitId, MaxSdk.Reward reward, MaxSdkBase.AdInfo adInfo)
+    {
         grantReward();
+        MaxSdkCallbacks.Rewarded.OnAdReceivedRewardEvent -= OnRewardedAdReceivedRewardEvent;
+    }
+    //Rewarded sample callback methods for Applovin Max
+    private void OnRewardedInterstitialAdReceivedRewardEvent(string adUnitId, MaxSdk.Reward reward, MaxSdkBase.AdInfo adInfo)
+    {
+        grantReward();
+        MaxSdkCallbacks.RewardedInterstitial.OnAdReceivedRewardEvent -= OnRewardedInterstitialAdReceivedRewardEvent;
     }
 
     public void grantReward() 
     {
+        Debug.Log("Reward Granted");
+        audioManager.instance.PlayAudio("win2", true, Vector3.zero);
         GameManager.instance.totalEarnings = finalAmount;
         GameManager.instance.winScore.text = finalAmount.ToString();
         gaugeAnim.enabled = false;

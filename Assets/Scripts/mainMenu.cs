@@ -32,6 +32,8 @@ public class mainMenu : MonoBehaviour
 
     private void Start()
     {
+        AdsManager.Instance.RunBannerAd();
+
         checkVibration();
         checkSound();
 
@@ -43,6 +45,8 @@ public class mainMenu : MonoBehaviour
 
     public void openLevelPanel() 
     {
+        AdsManager.Instance.RunInterstitialAd();
+
         levelsPanel.SetActive(true);
         levelsPanel.GetComponent<Animator>().SetBool("show", true);
     }

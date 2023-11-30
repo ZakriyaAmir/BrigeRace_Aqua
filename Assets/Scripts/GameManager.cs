@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
             instance = this;
         }
         player = Instantiate(playerPrefabs[PlayerPrefs.GetInt("selectedPlayer", 0)]);
+        FindObjectOfType<CameraFollow>().target = player.transform;
 
         //Reset current level if the total levels count exceeds
         if (PlayerPrefs.GetInt("currentLevel", 0) >= allLevels.Length) 
@@ -95,6 +96,8 @@ public class GameManager : MonoBehaviour
 
     public void pauseGame() 
     {
+        AdsManager.Instance.RunInterstitialAd();
+
         pausePanel.SetActive(true);
         pausePanel.GetComponent<Animator>().SetBool("show",true);
         StopAllPlayers();
@@ -121,6 +124,10 @@ public class GameManager : MonoBehaviour
             else
             {
                 player.GetComponent<MoveScript>().controller.enabled = false;
+                player.GetComponent<MoveScript>().splash1.gameObject.SetActive(false);
+                player.GetComponent<MoveScript>().splash2.gameObject.SetActive(false);
+                //player.GetComponent<MoveScript>().splash3.gameObject.SetActive(false);
+                player.GetComponent<MoveScript>().enabled = false;
             }
         }
     }
@@ -140,6 +147,8 @@ public class GameManager : MonoBehaviour
 
     public void ShowWinPanel(string winText)
     {
+        AdsManager.Instance.RunInterstitialAd();
+
         if (audioManager.instance.vibrationBool) 
         {
             Handheld.Vibrate();
@@ -147,7 +156,8 @@ public class GameManager : MonoBehaviour
 
         audioManager.instance.PlayAudio("win", true, Vector3.zero);
 
-        winPanel.SetActive(true);
+        Invoke("delayWinPanel", 6f);
+        
         //winMessage.text = winText;
         totalEarnings = totalBricksCollected * 10;
         winScore.text = totalEarnings .ToString();
@@ -158,8 +168,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void delayWinPanel() 
+    {
+        winPanel.SetActive(true);
+    }
+
     public void ShowLosePanel(string loseText)
     {
+        AdsManager.Instance.RunInterstitialAd();
+
         gameOver = true;
 
         if (audioManager.instance.vibrationBool)
@@ -192,12 +209,16 @@ public class GameManager : MonoBehaviour
 
     public void restartLevel()
     {
+        AdsManager.Instance.RunInterstitialAd();
+
         showLoading();
         StartCoroutine(delayLoadScene("gameplay"));
     }
 
     public void playNextLevel()
     {
+        AdsManager.Instance.RunInterstitialAd();
+
         showLoading();
         PlayerPrefs.SetInt("currentLevel", PlayerPrefs.GetInt("currentLevel", 0) + 1);
         StartCoroutine(delayLoadScene("gameplay"));
@@ -205,6 +226,8 @@ public class GameManager : MonoBehaviour
 
     public void OpenMainMenu() 
     {
+        AdsManager.Instance.RunInterstitialAd();
+
         showLoading();
         StartCoroutine(delayLoadScene("mainMenu"));
     }

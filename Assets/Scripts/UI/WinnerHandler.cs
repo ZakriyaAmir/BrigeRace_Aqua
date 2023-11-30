@@ -6,8 +6,11 @@ using UnityEngine.UI;
 
 public class WinnerHandler : MonoBehaviour
 {
-    public TMP_Text winnerText;
-    public GameObject resultPanel;
+    public Transform centerPoint;
+    public GameObject particle1;
+    public GameObject particle2;
+    public GameObject particle3;
+    public Transform camGhost;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -20,9 +23,13 @@ public class WinnerHandler : MonoBehaviour
         {
             GameManager.instance.ShowLosePanel("You have failed to finish first!");
         }
-        else 
+        else
         {
             GameManager.instance.ShowWinPanel("You Win!");
+            //Start celebration animations and particles
+            StartCoroutine(other.GetComponent<PlayerScript>().startCelebration(centerPoint, particle1, particle2));
+            FindObjectOfType<CameraFollow>().targetTransform = camGhost;
+            FindObjectOfType<CameraFollow>().startCelebration();
         }
         gameObject.GetComponent<Collider>().enabled = false;
 

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "611757265140",
+    "project_id": "fishbridge-2a7ea",
+    "storage_bucket": "fishbridge-2a7ea.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:611757265140:android:c834b7e2d5471edc654ea1",
+        "android_client_info": {
+          "package_name": "com.mobinators.fishbridge"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBruSYpRSudzCY7gmUZMeeLvKNlv7pm9SU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

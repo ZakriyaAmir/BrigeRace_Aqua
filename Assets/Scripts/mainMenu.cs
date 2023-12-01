@@ -1,4 +1,4 @@
-using Firebase;
+using GameAnalyticsSDK;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -20,7 +20,6 @@ public class mainMenu : MonoBehaviour
     public int maxLevels;
     public GameObject vibrationToggle;
     public GameObject soundToggle;
-    private FirebaseApp app;
 
     private void Awake()
     {
@@ -118,6 +117,8 @@ public class mainMenu : MonoBehaviour
 
     public void ToggleVibration() 
     {
+        GameAnalytics.NewDesignEvent("Vibration", PlayerPrefs.GetInt("vibration", 1));
+
         if (PlayerPrefs.GetInt("vibration", 1) == 1)
         {
             PlayerPrefs.SetInt("vibration", 0);

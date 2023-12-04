@@ -846,11 +846,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: ea2beac0-e324-42b9-9ac6-8733e49cccd7
+  cloudProjectId: f63d3c6e-7bfb-4baf-a747-b5f278090da8
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: pluginsTest
-  organizationId: mobinators1018
+  projectName: fishbridge (2)
+  organizationId: zakriya-amir
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

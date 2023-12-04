@@ -2,6 +2,7 @@ using GameAnalyticsSDK;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -21,8 +22,12 @@ public class mainMenu : MonoBehaviour
     public GameObject vibrationToggle;
     public GameObject soundToggle;
 
+    public static mainMenu Instance;
+
     private void Awake()
     {
+        Instance = this;
+
         Application.targetFrameRate = 120;
         mainPanel.SetActive(true);
 
@@ -37,9 +42,23 @@ public class mainMenu : MonoBehaviour
         checkSound();
 
         checklevels();
-        totalMoney.text = economyManager.Instance.money.ToString();
-
+        updateMoney();
         audioManager.instance.PlayAudio("menuBGM", false, Vector3.zero);
+    }
+
+    public void clearLevels() 
+    {
+        foreach (Transform level in levelsParent) 
+        {
+            Destroy(level.gameObject);
+        }
+    }
+
+    public void updateMoney() 
+    {
+        // Convert the integer to a string with "N0" format specifier
+        string formattedNumber = string.Format("{0:N0}", economyManager.Instance.money);
+        totalMoney.text = formattedNumber.ToString();
     }
 
     public void openLevelPanel() 
@@ -117,8 +136,6 @@ public class mainMenu : MonoBehaviour
 
     public void ToggleVibration() 
     {
-        GameAnalytics.NewDesignEvent("Vibration", PlayerPrefs.GetInt("vibration", 1));
-
         if (PlayerPrefs.GetInt("vibration", 1) == 1)
         {
             PlayerPrefs.SetInt("vibration", 0);

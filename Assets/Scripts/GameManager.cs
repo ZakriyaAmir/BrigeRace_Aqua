@@ -1,3 +1,5 @@
+using GameAnalyticsSDK.Events;
+using GameAnalyticsSDK;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,6 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 using static GameManager;
 
 public class GameManager : MonoBehaviour
@@ -51,6 +54,9 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Levels Reset");
             PlayerPrefs.SetInt("currentLevel", 0);
+
+            //GA Event
+            GameAnalytics.NewDesignEvent("Level Progress", PlayerPrefs.GetInt("All Levels Cleared"));
         }
 
         currentLevel = Instantiate(allLevels[PlayerPrefs.GetInt("currentLevel", 0)]).GetComponent<levelBehavior>();
@@ -64,6 +70,8 @@ public class GameManager : MonoBehaviour
     public void claimLevelReward() 
     {
         economyManager.Instance.addMoney(totalEarnings);
+        //GA Event
+        GameAnalytics.NewDesignEvent("Level Reward", PlayerPrefs.GetInt("Total Reward", totalEarnings));
     }
 
     private void Start()
@@ -82,6 +90,9 @@ public class GameManager : MonoBehaviour
         }
 
         checkSkybox();
+
+        //GA Event
+        GameAnalytics.NewDesignEvent("Level Progress", PlayerPrefs.GetInt("Level Started", PlayerPrefs.GetInt("currentLevel", 0)));
     }
 
     public void checkSkybox()
@@ -144,6 +155,9 @@ public class GameManager : MonoBehaviour
         if (player.transform.position.y < -15 && !gameOver)
         {
             ShowLosePanel("You Fell!");
+
+            //GA Event
+            GameAnalytics.NewDesignEvent("Level Progress", PlayerPrefs.GetInt("Fall Failed", PlayerPrefs.GetInt("currentLevel", 0)));
         }
     }
 
@@ -168,6 +182,8 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("levelsCompleted", PlayerPrefs.GetInt("levelsCompleted", 0) + 1);
         }
+        //GA Event
+        GameAnalytics.NewDesignEvent("Level Progress", PlayerPrefs.GetInt("Win", PlayerPrefs.GetInt("currentLevel", 0)));
     }
 
     public void delayWinPanel() 
@@ -192,6 +208,8 @@ public class GameManager : MonoBehaviour
         loseMessage.text = loseText;
         winPanel.SetActive(false);
         losePanel.SetActive(true);
+        //GA Event
+        GameAnalytics.NewDesignEvent("Level Progress", PlayerPrefs.GetInt("Lose", PlayerPrefs.GetInt("currentLevel", 0)));
     }
 
     public void StartTheGame()
@@ -215,6 +233,9 @@ public class GameManager : MonoBehaviour
 
         showLoading();
         StartCoroutine(delayLoadScene("gameplay"));
+
+        //GA Event
+        GameAnalytics.NewDesignEvent("Level Progress", PlayerPrefs.GetInt("Restart", PlayerPrefs.GetInt("currentLevel", 0)));
     }
 
     public void playNextLevel()

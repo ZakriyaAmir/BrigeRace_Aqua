@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using GoogleMobileAds.Api;
 using static AdsManager;
+using GameAnalyticsSDK;
 //using com.adjust.sdk;
 
 public class MediationManager : MonoBehaviour
@@ -106,10 +107,14 @@ public class MediationManager : MonoBehaviour
         {
             Debug.Log("Max Log = " + "Showing Interstitial");
             MaxSdk.ShowInterstitial(InterstitialAdUnitId);
+            // send ad event
+            GameAnalytics.NewAdEvent(GAAdAction.Show, GAAdType.Interstitial, "applovin", InterstitialAdUnitId);
         }
         else
         {
             Debug.Log("Max Log = " + "Ad not ready");
+            // send ad event
+            GameAnalytics.NewAdEvent(GAAdAction.FailedShow, GAAdType.Interstitial, "applovin", InterstitialAdUnitId);
         }
     }
 
@@ -198,10 +203,14 @@ public class MediationManager : MonoBehaviour
         {
             //rewardedStatusText.text = "Showing";
             MaxSdk.ShowRewardedAd(RewardedAdUnitId);
+            // send ad event
+            GameAnalytics.NewAdEvent(GAAdAction.Show, GAAdType.RewardedVideo, "applovin", RewardedAdUnitId);
         }
         else
         {
-            Debug.Log("Max Interstitial Ad not ready"); 
+            Debug.Log("Max Interstitial Ad not ready");
+            // send ad event
+            GameAnalytics.NewAdEvent(GAAdAction.FailedShow, GAAdType.RewardedVideo, "applovin", RewardedAdUnitId);
         }
     }
 
@@ -307,10 +316,14 @@ public class MediationManager : MonoBehaviour
         if (MaxSdk.IsRewardedInterstitialAdReady(RewardedInterstitialAdUnitId))
         {
             MaxSdk.ShowRewardedInterstitialAd(RewardedInterstitialAdUnitId);
+            // send ad event
+            GameAnalytics.NewAdEvent(GAAdAction.Show, GAAdType.RewardedVideo, "applovin_RewardedInterstitial", RewardedInterstitialAdUnitId);
         }
         else
         {
             Debug.Log("Ad not ready");
+            // send ad event
+            GameAnalytics.NewAdEvent(GAAdAction.FailedShow, GAAdType.RewardedVideo, "applovin_RewardedInterstitial", RewardedInterstitialAdUnitId);
         }
     }
 
@@ -418,6 +431,8 @@ public class MediationManager : MonoBehaviour
     public void ShowBannerMax()
     {
         MaxSdk.ShowBanner(BannerAdUnitId);
+        // send ad event
+        GameAnalytics.NewAdEvent(GAAdAction.Show, GAAdType.Banner, "applovin", BannerAdUnitId);
     }
     public void HideBannerMax()
     {
@@ -498,6 +513,8 @@ public class MediationManager : MonoBehaviour
 
         // MRECs are automatically sized to 300x250.
         MaxSdk.CreateMRec(MRecAdUnitId, AdsManager.Instance.MRecPosition);
+        // send ad event
+        GameAnalytics.NewAdEvent(GAAdAction.Show, GAAdType.Undefined, "applovin", MRecAdUnitId);
     }
     public void HideMRectangleMax()
     {

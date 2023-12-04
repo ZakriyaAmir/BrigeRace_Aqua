@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using GoogleMobileAds.Api;
 using GoogleMobileAds.Common;
+using GameAnalyticsSDK;
+
 public class AdmobManager : MonoBehaviour
 {
     private BannerView _bannerView;
@@ -83,11 +85,15 @@ public class AdmobManager : MonoBehaviour
                 {
                     Debug.LogError("app open ad failed to load an ad " +
                                    "with error : " + error);
+                    // send ad event
+                    GameAnalytics.NewAdEvent(GAAdAction.FailedShow, GAAdType.AppOpen, "admob", _adAppOpenAdUnitId);
                     return;
                 }
 
                 Debug.Log("App open ad loaded with response : "
                           + ad.GetResponseInfo());
+                // send ad event
+                GameAnalytics.NewAdEvent(GAAdAction.Show, GAAdType.AppOpen, "admob", _adAppOpenAdUnitId);
 
                 appOpenAd = ad;
             });
@@ -177,11 +183,15 @@ public class AdmobManager : MonoBehaviour
                 rewardCallback();
                 // TODO: Reward the user.
                 //Debug.Log(String.Format(rewardMsg, reward.Type, reward.Amount));
+                // send ad event
+                GameAnalytics.NewAdEvent(GAAdAction.Show, GAAdType.RewardedVideo, "admob_RewardedInterstitial", _adRewardedInterstitialUnitId);
             });
         }
         else
         {
             available = false;
+            // send ad event
+            GameAnalytics.NewAdEvent(GAAdAction.FailedShow, GAAdType.RewardedVideo, "admob_RewardedInterstitial", _adRewardedInterstitialUnitId);
         }
         return available;
     }
@@ -234,11 +244,16 @@ public class AdmobManager : MonoBehaviour
                 rewardCallback();
                 // TODO: Reward the user.
                 //Debug.Log(String.Format(rewardMsg, reward.Type, reward.Amount));
+
+                // send ad event
+                GameAnalytics.NewAdEvent(GAAdAction.Show, GAAdType.RewardedVideo, "admob", _adRewardedUnitId);
             });
         }
         else
         {
             available = false;
+            // send ad event
+            GameAnalytics.NewAdEvent(GAAdAction.FailedShow, GAAdType.RewardedVideo, "admob", _adRewardedUnitId);
         }
         return available;
     }
@@ -313,11 +328,15 @@ public class AdmobManager : MonoBehaviour
             _interstitialAd.Show();
             RegisterReloadHandler(_interstitialAd);
             available = true;
+            // send ad event
+            GameAnalytics.NewAdEvent(GAAdAction.Show, GAAdType.Interstitial, "admob", _adInterstitialUnitId);
         }
         else
         {
             Debug.LogError("Interstitial ad is not ready yet.");
             available = false;
+            // send ad event
+            GameAnalytics.NewAdEvent(GAAdAction.FailedShow, GAAdType.Interstitial, "admob", _adInterstitialUnitId);
         }
         return available;
     }
@@ -390,10 +409,14 @@ public class AdmobManager : MonoBehaviour
         {
             _bannerView.LoadAd(BannerAdRequest);
             available = true;
+            // send ad event
+            GameAnalytics.NewAdEvent(GAAdAction.Show, GAAdType.Banner, "admob", _adBannerUnitId);
         }
         else
         {
             available = false;
+            // send ad event
+            GameAnalytics.NewAdEvent(GAAdAction.FailedShow, GAAdType.Banner, "admob", _adBannerUnitId);
         }
         return available;
     }

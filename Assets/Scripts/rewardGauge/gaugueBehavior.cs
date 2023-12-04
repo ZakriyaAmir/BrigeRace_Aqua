@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Security.Claims;
+using GameAnalyticsSDK;
 
 public class gaugueBehavior : MonoBehaviour
 {
@@ -64,6 +65,7 @@ public class gaugueBehavior : MonoBehaviour
 
     public void grantReward() 
     {
+        
         Debug.Log("Reward Granted");
         audioManager.instance.PlayAudio("win2", true, Vector3.zero);
         GameManager.instance.totalEarnings = finalAmount;
@@ -71,5 +73,7 @@ public class gaugueBehavior : MonoBehaviour
         gaugeAnim.enabled = false;
         claimBtn.interactable = false;
         GameManager.instance.claimLevelReward();
+        //GA Event
+        GameAnalytics.NewDesignEvent("Level Reward", PlayerPrefs.GetInt("Reward Multiplier", rewardMultiplier));
     }
 }

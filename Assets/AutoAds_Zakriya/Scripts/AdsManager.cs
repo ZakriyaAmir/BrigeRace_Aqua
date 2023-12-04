@@ -96,6 +96,12 @@ public class AdsManager : MonoBehaviour
 
     public void RunInterstitialAd()
     {
+        if (PlayerPrefs.GetInt("noAds", 0) == 1) 
+        {
+            Debug.Log("No ads bundle bought");
+            return;
+        }
+
         if (admobInterstitial)
         {
             if (AdmobManager.Instance.ShowInterstitialAd() == true)
@@ -118,6 +124,12 @@ public class AdsManager : MonoBehaviour
 
     public void RunAdmobOpenAd()
     {
+        if (PlayerPrefs.GetInt("noAds", 0) == 1)
+        {
+            Debug.Log("No ads bundle bought");
+            return;
+        }
+
         if (admobOpenAd)
         {
             AdmobManager.Instance.ShowAppOpenAd();
@@ -126,6 +138,12 @@ public class AdsManager : MonoBehaviour
 
     public void RunBannerAd()
     {
+        if (PlayerPrefs.GetInt("noAds", 0) == 1)
+        {
+            Debug.Log("No ads bundle bought");
+            return;
+        }
+
         if (!admobBan && !maxBan)
         {
             if (admobBanner)
@@ -215,6 +233,12 @@ public class AdsManager : MonoBehaviour
     
     public void RunMRecAd()
     {
+        if (PlayerPrefs.GetInt("noAds", 0) == 1)
+        {
+            Debug.Log("No ads bundle bought");
+            return;
+        }
+
         if (maxMRec)
         {
             Debug.Log("Max MRec Ran");

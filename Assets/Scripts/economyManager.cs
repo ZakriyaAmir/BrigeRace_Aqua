@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Transactions;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class economyManager : MonoBehaviour
@@ -37,6 +38,11 @@ public class economyManager : MonoBehaviour
     public void updateAmount() 
     {
         money = PlayerPrefs.GetInt("money", 0);
+
+        if (SceneManager.GetActiveScene().name == "mainMenu")
+        {
+            mainMenu.Instance.updateMoney();
+        }
     }
 
     // Start is called before the first frame update
@@ -45,7 +51,7 @@ public class economyManager : MonoBehaviour
         if (PlayerPrefs.GetInt("firstTime", 1) == 1)
         {
             PlayerPrefs.SetInt("firstTime", 0);
-            PlayerPrefs.SetInt("money", initialMoney);
+            addMoney(initialMoney);
         }
     }
 
@@ -85,7 +91,6 @@ public class economyManager : MonoBehaviour
     private void DeductMoney(int amount)
     {
         PlayerPrefs.SetInt("money", PlayerPrefs.GetInt("money", 0) - amount);
-
         updateAmount();
     }
 

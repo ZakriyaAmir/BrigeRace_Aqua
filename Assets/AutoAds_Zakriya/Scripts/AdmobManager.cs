@@ -74,10 +74,10 @@ public class AdmobManager : MonoBehaviour
         Debug.Log("Loading the app open ad.");
 
         // Create our request used to load the ad.
-        var adRequest = new AdRequest();
+        var adRequest = new AdRequest.Builder().Build();
 
         // send the request to load the ad.
-        AppOpenAd.Load(_adAppOpenAdUnitId, adRequest,
+        AppOpenAd.Load(_adAppOpenAdUnitId,ScreenOrientation.LandscapeLeft, adRequest,
             (AppOpenAd ad, LoadAdError error) =>
             {
                 // if error is not null, the load request failed.
@@ -149,7 +149,7 @@ public class AdmobManager : MonoBehaviour
         Debug.Log("Loading the rewarded interstitial ad.");
 
         // create our request used to load the ad.
-        var adRequest = new AdRequest();
+        var adRequest = new AdRequest.Builder().Build();
         adRequest.Keywords.Add("unity-admob-sample");
 
         // send the request to load the ad.
@@ -210,7 +210,7 @@ public class AdmobManager : MonoBehaviour
         Debug.Log("Loading the rewarded ad.");
 
         // create our request used to load the ad.
-        var adRequest = new AdRequest();
+        var adRequest = new AdRequest.Builder().Build();
 
         // send the request to load the ad.
         RewardedAd.Load(_adRewardedUnitId, adRequest,
@@ -293,7 +293,7 @@ public class AdmobManager : MonoBehaviour
         Debug.Log("Loading the interstitial ad.");
 
         // create our request used to load the ad.
-        var adRequest = new AdRequest();
+        var adRequest = new AdRequest.Builder().Build();
 
         // send the request to load the ad.
         InterstitialAd.Load(_adInterstitialUnitId, adRequest,
@@ -395,7 +395,7 @@ public class AdmobManager : MonoBehaviour
         }
 
         // create our request used to load the ad.
-        BannerAdRequest = new AdRequest();
+        var adRequest = new AdRequest.Builder().Build();
 
         // send the request to load the ad.
         Debug.Log("Loading banner ad.");

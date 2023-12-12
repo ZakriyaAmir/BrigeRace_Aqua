@@ -1,5 +1,4 @@
-using GameAnalyticsSDK.Events;
-using GameAnalyticsSDK;
+using Firebase.Analytics;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,7 +55,8 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("currentLevel", 0);
 
             //GA Event
-            GameAnalytics.NewDesignEvent("Level Progress", PlayerPrefs.GetInt("All Levels Cleared"));
+            FirebaseAnalytics.LogEvent("All_Levels" + "_Cleared");
+
         }
 
         currentLevel = Instantiate(allLevels[PlayerPrefs.GetInt("currentLevel", 0)]).GetComponent<levelBehavior>();
@@ -71,13 +71,11 @@ public class GameManager : MonoBehaviour
     {
         economyManager.Instance.addMoney(totalEarnings);
         //GA Event
-        GameAnalytics.NewDesignEvent("Level Reward", PlayerPrefs.GetInt("Total Reward", totalEarnings));
+        FirebaseAnalytics.LogEvent("Level_Reward_" + totalEarnings);
     }
 
     private void Start()
     {
-        AdsManager.Instance.Invoke("RunBannerAd", 2f);
-
         allPlayers = FindObjectsOfType<PlayerScript>();
         StopAllPlayers();
         currentLevel.AssignUniqueSpawnPositions();
@@ -92,7 +90,7 @@ public class GameManager : MonoBehaviour
         checkSkybox();
 
         //GA Event
-        GameAnalytics.NewDesignEvent("Level Progress", PlayerPrefs.GetInt("Level Started", PlayerPrefs.GetInt("currentLevel", 0)));
+        FirebaseAnalytics.LogEvent("Level_Started_" + PlayerPrefs.GetInt("currentLevel", 0));
     }
 
     public void checkSkybox()
@@ -109,11 +107,11 @@ public class GameManager : MonoBehaviour
 
     public void pauseGame() 
     {
-        AdsManager.Instance.RunInterstitialAd();
-
         pausePanel.SetActive(true);
         pausePanel.GetComponent<Animator>().SetBool("show",true);
         StopAllPlayers();
+
+        AdsManager.Instance.RunInterstitialAd();
     }
 
     public void unPauseGame()
@@ -157,13 +155,12 @@ public class GameManager : MonoBehaviour
             ShowLosePanel("You Fell!");
 
             //GA Event
-            GameAnalytics.NewDesignEvent("Level Progress", PlayerPrefs.GetInt("Fall Failed", PlayerPrefs.GetInt("currentLevel", 0)));
+            FirebaseAnalytics.LogEvent("Level_Failed_Fall_" + PlayerPrefs.GetInt("currentLevel", 0));
         }
     }
 
     public void ShowWinPanel(string winText)
     {
-        AdsManager.Instance.RunInterstitialAd();
 
         if (audioManager.instance.vibrationBool) 
         {
@@ -182,8 +179,11 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("levelsCompleted", PlayerPrefs.GetInt("levelsCompleted", 0) + 1);
         }
+
+        AdsManager.Instance.RunInterstitialAd();
+
         //GA Event
-        GameAnalytics.NewDesignEvent("Level Progress", PlayerPrefs.GetInt("Win", PlayerPrefs.GetInt("currentLevel", 0)));
+        FirebaseAnalytics.LogEvent("Level_Completed_" + PlayerPrefs.GetInt("currentLevel", 0));
     }
 
     public void delayWinPanel() 
@@ -193,8 +193,6 @@ public class GameManager : MonoBehaviour
 
     public void ShowLosePanel(string loseText)
     {
-        AdsManager.Instance.RunInterstitialAd();
-
         gameOver = true;
 
         if (audioManager.instance.vibrationBool)
@@ -208,8 +206,11 @@ public class GameManager : MonoBehaviour
         loseMessage.text = loseText;
         winPanel.SetActive(false);
         losePanel.SetActive(true);
+
+        AdsManager.Instance.RunInterstitialAd();
+
         //GA Event
-        GameAnalytics.NewDesignEvent("Level Progress", PlayerPrefs.GetInt("Lose", PlayerPrefs.GetInt("currentLevel", 0)));
+        FirebaseAnalytics.LogEvent("Level_Failed_" + PlayerPrefs.GetInt("currentLevel", 0));
     }
 
     public void StartTheGame()
@@ -229,30 +230,33 @@ public class GameManager : MonoBehaviour
 
     public void restartLevel()
     {
-        AdsManager.Instance.RunInterstitialAd();
-
         showLoading();
         StartCoroutine(delayLoadScene("gameplay"));
 
+        AdsManager.Instance.RunInterstitialAd();
+
         //GA Event
-        GameAnalytics.NewDesignEvent("Level Progress", PlayerPrefs.GetInt("Restart", PlayerPrefs.GetInt("currentLevel", 0)));
+        FirebaseAnalytics.LogEvent("Level_Restart_" + PlayerPrefs.GetInt("currentLevel", 0));
     }
 
     public void playNextLevel()
     {
-        AdsManager.Instance.RunInterstitialAd();
-
         showLoading();
         PlayerPrefs.SetInt("currentLevel", PlayerPrefs.GetInt("currentLevel", 0) + 1);
         StartCoroutine(delayLoadScene("gameplay"));
+
+        AdsManager.Instance.RunInterstitialAd();
     }
 
     public void OpenMainMenu() 
     {
-        AdsManager.Instance.RunInterstitialAd();
-
         showLoading();
         StartCoroutine(delayLoadScene("mainMenu"));
+
+        AdsManager.Instance.RunInterstitialAd();
+
+        //GA Event
+        FirebaseAnalytics.LogEvent("Level_Quit_" + PlayerPrefs.GetInt("currentLevel", 0));
     }
 
     public IEnumerator delayLoadScene(string scene)

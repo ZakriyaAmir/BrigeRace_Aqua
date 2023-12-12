@@ -31,6 +31,7 @@ public class CameraFollow : MonoBehaviour
 
     IEnumerator lerpToCelebrate()
     {
+        yield return new WaitForSeconds(1.6f);
         while (Vector3.Distance(transform.position, targetTransform.position) > 0.01f || Quaternion.Angle(transform.rotation, targetTransform.rotation) > 0.01f)
         {
             // Lerp position

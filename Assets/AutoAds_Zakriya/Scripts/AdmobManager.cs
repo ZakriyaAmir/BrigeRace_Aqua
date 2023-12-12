@@ -2,14 +2,15 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using GoogleMobileAds.Api;
 using GoogleMobileAds.Common;
-using GameAnalyticsSDK;
+using Firebase.Analytics;
+using GoogleMobileAds;
+using GoogleMobileAds.Api;
+using static MaxSdkCallbacks;
 
 public class AdmobManager : MonoBehaviour
 {
     private BannerView _bannerView;
-    AdRequest BannerAdRequest;
     private InterstitialAd _interstitialAd;
     private RewardedAd _rewardedAd;
     public bool isRewardedAdReady = false;
@@ -39,11 +40,11 @@ public class AdmobManager : MonoBehaviour
         _adAppOpenAdUnitId = _AdsManager.AdmobAppOpenAdUnitId;
 
         AppStateEventNotifier.AppStateChanged += OnAppStateChanged;
-        LoadRewardedAd();
         LoadBannerAd();
+        LoadRewardedAd();
         LoadInterstitialAd();
         LoadRewardedInterstitialAd();
-        LoadAppOpenAd();
+        //LoadAppOpenAd();
     }
     private void OnDestroy()
     {
@@ -86,14 +87,15 @@ public class AdmobManager : MonoBehaviour
                     Debug.LogError("app open ad failed to load an ad " +
                                    "with error : " + error);
                     // send ad event
-                    GameAnalytics.NewAdEvent(GAAdAction.FailedShow, GAAdType.AppOpen, "admob", _adAppOpenAdUnitId);
+                    FirebaseAnalytics.LogEvent("Admob" + "_OpenApp" + "_success");
                     return;
                 }
 
                 Debug.Log("App open ad loaded with response : "
                           + ad.GetResponseInfo());
                 // send ad event
-                GameAnalytics.NewAdEvent(GAAdAction.Show, GAAdType.AppOpen, "admob", _adAppOpenAdUnitId);
+                FirebaseAnalytics.LogEvent("Admob" + "_OpenApp" + "_failed");
+
 
                 appOpenAd = ad;
             });
@@ -184,14 +186,14 @@ public class AdmobManager : MonoBehaviour
                 // TODO: Reward the user.
                 //Debug.Log(String.Format(rewardMsg, reward.Type, reward.Amount));
                 // send ad event
-                GameAnalytics.NewAdEvent(GAAdAction.Show, GAAdType.RewardedVideo, "admob_RewardedInterstitial", _adRewardedInterstitialUnitId);
+                FirebaseAnalytics.LogEvent("Admob" + "_RewardedInterstitial" + "_success");
             });
         }
         else
         {
             available = false;
             // send ad event
-            GameAnalytics.NewAdEvent(GAAdAction.FailedShow, GAAdType.RewardedVideo, "admob_RewardedInterstitial", _adRewardedInterstitialUnitId);
+            FirebaseAnalytics.LogEvent("Admob" + "_RewardedInterstitial" + "_failed");
         }
         return available;
     }
@@ -246,14 +248,14 @@ public class AdmobManager : MonoBehaviour
                 //Debug.Log(String.Format(rewardMsg, reward.Type, reward.Amount));
 
                 // send ad event
-                GameAnalytics.NewAdEvent(GAAdAction.Show, GAAdType.RewardedVideo, "admob", _adRewardedUnitId);
+                FirebaseAnalytics.LogEvent("Admob" + "_Rewarded" + "_success");
             });
         }
         else
         {
             available = false;
             // send ad event
-            GameAnalytics.NewAdEvent(GAAdAction.FailedShow, GAAdType.RewardedVideo, "admob", _adRewardedUnitId);
+            FirebaseAnalytics.LogEvent("Admob" + "_Rewarded" + "_failed");
         }
         return available;
     }
@@ -329,14 +331,14 @@ public class AdmobManager : MonoBehaviour
             RegisterReloadHandler(_interstitialAd);
             available = true;
             // send ad event
-            GameAnalytics.NewAdEvent(GAAdAction.Show, GAAdType.Interstitial, "admob", _adInterstitialUnitId);
+            FirebaseAnalytics.LogEvent("Admob" + "_Interstitial" + "_success");
         }
         else
         {
             Debug.LogError("Interstitial ad is not ready yet.");
             available = false;
             // send ad event
-            GameAnalytics.NewAdEvent(GAAdAction.FailedShow, GAAdType.Interstitial, "admob", _adInterstitialUnitId);
+            FirebaseAnalytics.LogEvent("Admob" + "_Interstitial" + "_failed");
         }
         return available;
     }
@@ -369,19 +371,23 @@ public class AdmobManager : MonoBehaviour
         // If we already have a banner, destroy the old one.
         if (_bannerView != null)
         {
-            //DestroyAd();
+            DestroyBannerView();
         }
+
         if (AdsManager.Instance.bannerPosition == AdsManager.BannerPosition.Top)
         {
             //Customize banner ad size here
-            _bannerView = new BannerView(_adBannerUnitId, AdSize.SmartBanner, AdPosition.Top);
+            Debug.Log("Top Banner");
+            _bannerView = new BannerView(_adBannerUnitId, AdSize.Banner, AdPosition.Top);
         }
         else if (AdsManager.Instance.bannerPosition == AdsManager.BannerPosition.Bottom)
         {
             //Customize banner ad size here
-            _bannerView = new BannerView(_adBannerUnitId, AdSize.SmartBanner, AdPosition.Bottom);
+            Debug.Log("Bottom Banner");
+            _bannerView = new BannerView(_adBannerUnitId, AdSize.Banner, AdPosition.Bottom);
         }
     }
+
 
     /// <summary>
     /// Creates the banner view and loads a banner ad.
@@ -394,12 +400,7 @@ public class AdmobManager : MonoBehaviour
             CreateBannerView();
         }
 
-        // create our request used to load the ad.
-        var adRequest = new AdRequest.Builder().Build();
-
-        // send the request to load the ad.
         Debug.Log("Loading banner ad.");
-        //BannerViewController.instance.ShowAd();
     }
 
     public bool showBannerAd()
@@ -407,19 +408,26 @@ public class AdmobManager : MonoBehaviour
         bool available = false;
         if (_bannerView != null)
         {
-            _bannerView.LoadAd(BannerAdRequest);
-            available = true;
+            AdRequest request = AdRequestBuild();
+            _bannerView.LoadAd(request);
+
             // send ad event
-            GameAnalytics.NewAdEvent(GAAdAction.Show, GAAdType.Banner, "admob", _adBannerUnitId);
+            FirebaseAnalytics.LogEvent("Admob" + "_Banner" + "_success");
         }
         else
         {
             available = false;
             // send ad event
-            GameAnalytics.NewAdEvent(GAAdAction.FailedShow, GAAdType.Banner, "admob", _adBannerUnitId);
+            FirebaseAnalytics.LogEvent("Admob" + "_Banner" + "_failed");
         }
         return available;
     }
+
+    AdRequest AdRequestBuild()
+    {
+        return new AdRequest.Builder().Build();
+    }
+
     public void HideBannerAd()
     {
         if (_bannerView != null)

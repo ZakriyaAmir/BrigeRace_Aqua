@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Security.Claims;
-using GameAnalyticsSDK;
+using Firebase.Analytics;
 
 public class gaugueBehavior : MonoBehaviour
 {
@@ -33,13 +33,13 @@ public class gaugueBehavior : MonoBehaviour
 
     public void claimReward()
     {
+        claimed = true;
+
         //Play Reward Ad here
         //Initialize Admob reward callback in the script in which you are required to use rewarded ad for admob
         AdsManager.Instance.RunRewardedAd(() => grantReward());
         //Initialize Max reward callback in the script in which you are required to use rewarded ad for applovin
         MaxSdkCallbacks.Rewarded.OnAdReceivedRewardEvent += OnRewardedAdReceivedRewardEvent;
-
-        claimed = true;
     }
 
     public void getRewardInterstitial()
@@ -74,6 +74,6 @@ public class gaugueBehavior : MonoBehaviour
         claimBtn.interactable = false;
         GameManager.instance.claimLevelReward();
         //GA Event
-        GameAnalytics.NewDesignEvent("Level Reward", PlayerPrefs.GetInt("Reward Multiplier", rewardMultiplier));
+        FirebaseAnalytics.LogEvent("Level_Reward_Multiplier_" + rewardMultiplier);
     }
 }

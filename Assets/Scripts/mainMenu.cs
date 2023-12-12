@@ -1,4 +1,3 @@
-using GameAnalyticsSDK;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -36,14 +35,14 @@ public class mainMenu : MonoBehaviour
 
     private void Start()
     {
-        AdsManager.Instance.Invoke("RunBannerAd",3f);
-
         checkVibration();
         checkSound();
 
         checklevels();
         updateMoney();
         audioManager.instance.PlayAudio("menuBGM", false, Vector3.zero);
+
+        AdsManager.Instance.Invoke("RunBannerAd", 4f);
     }
 
     public void clearLevels() 
@@ -149,8 +148,6 @@ public class mainMenu : MonoBehaviour
 
     public void ToggleSound()
     {
-        AdsManager.Instance.RunInterstitialAd();
-
         if (PlayerPrefs.GetInt("sound", 1) == 1)
         {
             PlayerPrefs.SetInt("sound", 0);
@@ -171,6 +168,8 @@ public class mainMenu : MonoBehaviour
             }
         }
         checkSound();
+
+        AdsManager.Instance.RunInterstitialAd();
     }
 
     public void checklevels()

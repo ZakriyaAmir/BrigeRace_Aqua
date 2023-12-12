@@ -1,4 +1,4 @@
-﻿using GameAnalyticsSDK;
+﻿using Firebase.Analytics;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -92,7 +92,7 @@ public class UnityIAP : MonoBehaviour, IStoreListener
         if (!IsInitialized())
         {
             //GA Event
-            GameAnalytics.NewDesignEvent("IAP Restore Failed");
+            FirebaseAnalytics.LogEvent("Restore" + "_Purchase" + "_failed");
 
             Debug.Log("RestorePurchases FAIL. Not initialized.");
             //return;
@@ -106,7 +106,7 @@ public class UnityIAP : MonoBehaviour, IStoreListener
         //
 
         //GA Event
-        GameAnalytics.NewDesignEvent("IAP Restored");
+        FirebaseAnalytics.LogEvent("Restore" + "_Purchase" + "_success");
 
         if (Application.platform == RuntimePlatform.IPhonePlayer ||
              Application.platform == RuntimePlatform.OSXPlayer)
@@ -123,7 +123,7 @@ public class UnityIAP : MonoBehaviour, IStoreListener
         {
             Debug.Log("RestorePurchases FAIL. Not supported on this platform. Current = " + Application.platform);
             //GA Event
-            GameAnalytics.NewDesignEvent("IAP Restore Failed");
+            FirebaseAnalytics.LogEvent("Restore" + "_Purchase" + "_failed");
         }
     }
     /****** Unity IAP Callback Events ******/
@@ -296,7 +296,7 @@ public class UnityIAP : MonoBehaviour, IStoreListener
         {
             economyManager.Instance.addMoney(5000000);
             //GA Event
-            GameAnalytics.NewDesignEvent("IAP 5000 Coins Bought");
+            FirebaseAnalytics.LogEvent("IAP_5000Coins" + "_Bought");
         };
         GeneralFunctionl(inAppProductIdIndex);
     }
@@ -305,11 +305,12 @@ public class UnityIAP : MonoBehaviour, IStoreListener
     {
         onPurchaseComplete = delegate
         {
-            AdsManager.Instance.HideBanner();
-            AdsManager.Instance.HideMRecAd();
             PlayerPrefs.SetInt("noAds", 1);
             //GA Event
-            GameAnalytics.NewDesignEvent("IAP No Ads Bought");
+            FirebaseAnalytics.LogEvent("IAP_NoAds" + "_Bought");
+
+            AdsManager.Instance.HideBanner();
+            AdsManager.Instance.HideMRecAd();
         };
         GeneralFunctionl(inAppProductIdIndex);
     }
@@ -320,16 +321,17 @@ public class UnityIAP : MonoBehaviour, IStoreListener
         {
             economyManager.Instance.addMoney(5000000);
 
-            AdsManager.Instance.HideBanner();
-            AdsManager.Instance.HideMRecAd();
+            
             PlayerPrefs.SetInt("noAds", 1);
-
             PlayerPrefs.SetInt("levelsCompleted", 50);
             mainMenu.Instance.clearLevels();
             mainMenu.Instance.checklevels();
 
             //GA Event
-            GameAnalytics.NewDesignEvent("IAP Premium Bundle Bought");
+            FirebaseAnalytics.LogEvent("IAP_PremiumBundle" + "_Bought");
+
+            AdsManager.Instance.HideBanner();
+            AdsManager.Instance.HideMRecAd();
         };
         GeneralFunctionl(inAppProductIdIndex);
     }

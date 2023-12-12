@@ -4,8 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using GoogleMobileAds.Api;
 using static AdsManager;
-using GameAnalyticsSDK;
-//using com.adjust.sdk;
+using Firebase.Analytics;
 
 public class MediationManager : MonoBehaviour
 {
@@ -108,13 +107,13 @@ public class MediationManager : MonoBehaviour
             Debug.Log("Max Log = " + "Showing Interstitial");
             MaxSdk.ShowInterstitial(InterstitialAdUnitId);
             // send ad event
-            GameAnalytics.NewAdEvent(GAAdAction.Show, GAAdType.Interstitial, "applovin", InterstitialAdUnitId);
+            FirebaseAnalytics.LogEvent("Applovin" + "_Intersitial" + "_success");
         }
         else
         {
             Debug.Log("Max Log = " + "Ad not ready");
             // send ad event
-            GameAnalytics.NewAdEvent(GAAdAction.FailedShow, GAAdType.Interstitial, "applovin", InterstitialAdUnitId);
+            FirebaseAnalytics.LogEvent("Applovin" + "_Intersitial" + "_failed");
         }
     }
 
@@ -204,13 +203,13 @@ public class MediationManager : MonoBehaviour
             //rewardedStatusText.text = "Showing";
             MaxSdk.ShowRewardedAd(RewardedAdUnitId);
             // send ad event
-            GameAnalytics.NewAdEvent(GAAdAction.Show, GAAdType.RewardedVideo, "applovin", RewardedAdUnitId);
+            FirebaseAnalytics.LogEvent("Applovin" + "_Rewarded" + "_success");
         }
         else
         {
             Debug.Log("Max Interstitial Ad not ready");
             // send ad event
-            GameAnalytics.NewAdEvent(GAAdAction.FailedShow, GAAdType.RewardedVideo, "applovin", RewardedAdUnitId);
+            FirebaseAnalytics.LogEvent("Applovin" + "_Rewarded" + "_failed");
         }
     }
 
@@ -317,13 +316,14 @@ public class MediationManager : MonoBehaviour
         {
             MaxSdk.ShowRewardedInterstitialAd(RewardedInterstitialAdUnitId);
             // send ad event
-            GameAnalytics.NewAdEvent(GAAdAction.Show, GAAdType.RewardedVideo, "applovin_RewardedInterstitial", RewardedInterstitialAdUnitId);
+            FirebaseAnalytics.LogEvent("Applovin" + "_RewardedInterstitial" + "_success");
+
         }
         else
         {
             Debug.Log("Ad not ready");
             // send ad event
-            GameAnalytics.NewAdEvent(GAAdAction.FailedShow, GAAdType.RewardedVideo, "applovin_RewardedInterstitial", RewardedInterstitialAdUnitId);
+            FirebaseAnalytics.LogEvent("Applovin" + "_RewardedInterstitial" + "_failed");
         }
     }
 
@@ -432,7 +432,7 @@ public class MediationManager : MonoBehaviour
     {
         MaxSdk.ShowBanner(BannerAdUnitId);
         // send ad event
-        GameAnalytics.NewAdEvent(GAAdAction.Show, GAAdType.Banner, "applovin", BannerAdUnitId);
+        FirebaseAnalytics.LogEvent("Applovin" + "_Banner" + "_success");
     }
     public void HideBannerMax()
     {
@@ -514,7 +514,7 @@ public class MediationManager : MonoBehaviour
         // MRECs are automatically sized to 300x250.
         MaxSdk.CreateMRec(MRecAdUnitId, AdsManager.Instance.MRecPosition);
         // send ad event
-        GameAnalytics.NewAdEvent(GAAdAction.Show, GAAdType.Undefined, "applovin", MRecAdUnitId);
+        FirebaseAnalytics.LogEvent("Applovin" + "_MREC" + "_success");
     }
     public void HideMRectangleMax()
     {

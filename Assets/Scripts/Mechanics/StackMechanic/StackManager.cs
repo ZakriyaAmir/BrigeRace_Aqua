@@ -5,11 +5,11 @@ using DG.Tweening;
 
 public class StackManager : MonoBehaviour
 {
-    [SerializeField] private GameObject stackPoint;
+    [SerializeField] public GameObject stackPoint;
     [SerializeField] private float stackYIncreaseRate = 0.32f;
     [SerializeField] private float stackXposition = -0.18f;
 
-    [SerializeField] List<GameObject> bricks = new List<GameObject>();
+    [SerializeField] public List<GameObject> bricks = new List<GameObject>();
     private bool isPlayer;
 
     private void Start()
@@ -79,5 +79,4 @@ public class StackManager : MonoBehaviour
         brick.transform.DOLocalMove(targetPosition, 0.2f);
         brick.transform.rotation = stackPoint.transform.rotation;
     }
-
 }

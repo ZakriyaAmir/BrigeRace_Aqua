@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "611757265140",
-    "project_id": "fishbridge-2a7ea",
-    "storage_bucket": "fishbridge-2a7ea.appspot.com"
+    "project_number": "905632509069",
+    "project_id": "bridge-simulator-c0c42",
+    "storage_bucket": "bridge-simulator-c0c42.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:611757265140:android:c834b7e2d5471edc654ea1",
+        "mobilesdk_app_id": "1:905632509069:android:ff1ff9c2d08438d807c6c4",
         "android_client_info": {
-          "package_name": "com.mobinators.fishbridge"
+          "package_name": "com.gamytune.bridge.race.fish.games"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBruSYpRSudzCY7gmUZMeeLvKNlv7pm9SU"
+          "current_key": "AIzaSyDKWcQEdp2xsboiBUdR3W0SPoUMEdgPDdc"
         }
       ],
       "services": {

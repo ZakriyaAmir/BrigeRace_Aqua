@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -56,42 +57,34 @@ public class PlayerScript : MonoBehaviour
     public IEnumerator startCelebration(Transform destination, GameObject particle1, GameObject particle2)
     {
         audioManager.instance.stopMusic();
-        yield return new WaitForSeconds(1.2f);
-        float firingAngle = 80.0f;
-        float gravity = 9.8f;
 
-        // Move projectile to the position of throwing object + add some offset if needed.
-        transform.position = transform.position + new Vector3(0, 0.0f, 0);
+        //Hide fish stack
+        GetComponent<StackManager>().stackPoint.SetActive(false);
 
-        // Calculate distance to target
-        float target_Distance = Vector3.Distance(transform.position, destination.position);
-
-        // Calculate the velocity needed to throw the object to the target at specified angle.
-        float projectile_Velocity = target_Distance / (Mathf.Sin(2 * firingAngle * Mathf.Deg2Rad) / gravity);
-
-        // Extract the X  Y componenent of the velocity
-        float Vx = Mathf.Sqrt(projectile_Velocity) * Mathf.Cos(firingAngle * Mathf.Deg2Rad);
-        float Vy = Mathf.Sqrt(projectile_Velocity) * Mathf.Sin(firingAngle * Mathf.Deg2Rad);
-
-        // Calculate flight time.
-        float flightDuration = target_Distance / Vx;
-
-        // Rotate projectile to face the target.
-        transform.rotation = Quaternion.LookRotation(destination.position - transform.position);
-
-        float elapse_time = 0;
-
-        while (elapse_time < flightDuration)
+        float elapsedTime = 0f;
+        float lerpTime = 2f;
+        Vector3 initialPosition = transform.position;
+        while (elapsedTime < lerpTime)
         {
-            transform.Translate(0, (Vy - (gravity * elapse_time)) * Time.deltaTime, Vx * Time.deltaTime);
+            // Increment the elapsed time
+            elapsedTime += Time.deltaTime;
 
-            elapse_time += Time.deltaTime;
+            // Calculate the lerp factor based on elapsed time and lerp time
+            float lerpFactor = Mathf.Clamp01(elapsedTime / lerpTime);
 
+            // Lerp the position
+            transform.position = Vector3.Lerp(initialPosition, destination.position, lerpFactor);
+
+            // Wait for the next frame
             yield return null;
         }
 
-        // Ensure the final position is exactly at targetB
+        // Ensure the final position is exactly the target position
         transform.position = destination.position;
+
+        transform.GetChild(0).GetComponent<Animator>().SetTrigger("win");
+
+        yield return new WaitForSeconds(1.2f);
 
         particle1.SetActive(true);
         audioManager.instance.PlayAudio("waterDrop", true, Vector3.zero);

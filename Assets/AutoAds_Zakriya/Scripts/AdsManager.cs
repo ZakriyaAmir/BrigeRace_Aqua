@@ -31,6 +31,7 @@ public class AdsManager : MonoBehaviour
     public string MaxRewardedInterstitialAdUnitId;
     public string MaxBannerAdUnitId;
     public string MaxMRecAdUnitId;
+    public bool useMaxAds;
     public bool maxInterstitial;
     public bool maxBanner;
     public bool maxRewarded;
@@ -71,7 +72,14 @@ public class AdsManager : MonoBehaviour
 
     public void Awake()
     {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         Instance = this;
+        DontDestroyOnLoad(gameObject);
 
         if (testMode)
         {
@@ -90,8 +98,11 @@ public class AdsManager : MonoBehaviour
             MaxMRecAdUnitId = "bcb5a19fc4a78113";
         }
 
-        gameObject.AddComponent<MediationManager>();
         gameObject.AddComponent<AdmobManager>();
+        if (useMaxAds) 
+        {
+            gameObject.AddComponent<MediationManager>();
+        }
     }
 
     public void RunInterstitialAd()

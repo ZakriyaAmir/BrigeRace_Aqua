@@ -31,8 +31,6 @@ public class economyManager : MonoBehaviour
         {
             Instance = this;
         }
-
-        updateAmount();
     }
 
     public void updateAmount() 
@@ -53,6 +51,8 @@ public class economyManager : MonoBehaviour
             PlayerPrefs.SetInt("firstTime", 0);
             addMoney(initialMoney);
         }
+
+        updateAmount();
     }
 
     public void addMoney(int amount)

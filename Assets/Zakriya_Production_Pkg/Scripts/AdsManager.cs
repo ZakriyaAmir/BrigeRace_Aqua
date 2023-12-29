@@ -74,6 +74,7 @@ public class AdsManager : MonoBehaviour
     {
         if (Instance != null)
         {
+            Debug.Log("Zak3");
             Destroy(gameObject);
             return;
         }
@@ -97,7 +98,6 @@ public class AdsManager : MonoBehaviour
             MaxBannerAdUnitId = "a7b90d54cef49c8a";
             MaxMRecAdUnitId = "bcb5a19fc4a78113";
         }
-
         gameObject.AddComponent<AdmobManager>();
         if (useMaxAds) 
         {

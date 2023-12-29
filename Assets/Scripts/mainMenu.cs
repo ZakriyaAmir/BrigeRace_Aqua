@@ -13,6 +13,7 @@ public class mainMenu : MonoBehaviour
     public GameObject settingsPanel;
     public GameObject levelsPanel;
     public GameObject loadingPanel;
+    public GameObject consentPanel;
     public GameObject levelPrefab;
     public Transform levelsParent;
     public TMP_Text totalMoney;
@@ -30,7 +31,24 @@ public class mainMenu : MonoBehaviour
         Application.targetFrameRate = 120;
         mainPanel.SetActive(true);
 
+        if (PlayerPrefs.GetInt("consent", 0) == 0) 
+        {
+            consentPanel.SetActive(true);
+        }
+
        //PlayerPrefs.SetInt("levelsCompleted", 50);
+    }
+
+    public void acceptConsent() 
+    {
+        PlayerPrefs.SetInt("consent", 1);
+        consentPanel.SetActive(false);
+    }
+
+    public void rejectConsent()
+    {
+        PlayerPrefs.SetInt("consent", 0);
+        Application.Quit();
     }
 
     private void Start()

@@ -30,33 +30,40 @@ public class AdmobManager : MonoBehaviour
 
     public void Awake()
     {
+        Debug.Log("Zak1");
         Instance = this;
+        Debug.Log("Zak2");
+
         _AdsManager = GetComponent<AdsManager>();
+        Debug.Log("Zak3");
 
         _adRewardedUnitId = _AdsManager.AdmobRewardedUnitId;
         _adBannerUnitId = _AdsManager.AdmobBannerUnitId;
         _adInterstitialUnitId = _AdsManager.AdmobInterstitialUnitId;
         _adRewardedInterstitialUnitId = _AdsManager.AdmobRewardedInterstitialUnitId;
         _adAppOpenAdUnitId = _AdsManager.AdmobAppOpenAdUnitId;
+        Debug.Log("Zak4");
 
-        AppStateEventNotifier.AppStateChanged += OnAppStateChanged;
-        LoadBannerAd();
-        LoadRewardedAd();
-        LoadInterstitialAd();
-        LoadRewardedInterstitialAd();
-        //LoadAppOpenAd();
+        //AppStateEventNotifier.AppStateChanged += OnAppStateChanged;
     }
     private void OnDestroy()
     {
         // Always unlisten to events when complete.
-        AppStateEventNotifier.AppStateChanged -= OnAppStateChanged;
+        //AppStateEventNotifier.AppStateChanged -= OnAppStateChanged;
     }
     public void Start()
     {
+        Debug.Log("Zak5");
         // Initialize the Google Mobile Ads SDK.
         MobileAds.Initialize((InitializationStatus initStatus) =>
         {
+            Debug.Log("Zak6");
             Debug.Log("Admob Intitialized");
+            LoadBannerAd();
+            LoadRewardedAd();
+            LoadInterstitialAd();
+            //LoadRewardedInterstitialAd();
+            //LoadAppOpenAd();
             // This callback is called once the MobileAds SDK is initialized.
         });
     }

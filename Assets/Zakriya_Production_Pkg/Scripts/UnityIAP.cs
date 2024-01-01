@@ -306,11 +306,10 @@ public class UnityIAP : MonoBehaviour, IStoreListener
         onPurchaseComplete = delegate
         {
             PlayerPrefs.SetInt("noAds", 1);
-            //GA Event
-            FirebaseAnalytics.LogEvent("IAP_NoAds" + "_Bought");
-
             AdsManager.Instance.HideBanner();
             AdsManager.Instance.HideMRecAd();
+            //GA Event
+            FirebaseAnalytics.LogEvent("IAP_NoAds" + "_Bought");
         };
         GeneralFunctionl(inAppProductIdIndex);
     }

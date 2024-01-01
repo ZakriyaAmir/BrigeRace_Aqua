@@ -196,6 +196,7 @@ GameObject:
   - component: {fileID: 6494654722126883117}
   - component: {fileID: 3285422839706379382}
   - component: {fileID: 2801702494394713763}
+  - component: {fileID: 3083555802312743285}
   m_Layer: 6
   m_Name: polySurface9
   m_TagString: Floor
@@ -309,6 +310,28 @@ MonoBehaviour:
   m_Center: {x: 0, y: 1, z: 0}
   m_Area: 0
   m_AffectedAgents: ffffffff
+--- !u!64 &3083555802312743285
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5387223170894221900}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2297425034801156755, guid: 0aba10d2e917e8c48a9f89f6dcfc747d, type: 3}
 --- !u!1 &6089573611983437427
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,9 +376,9 @@ GameObject:
   - component: {fileID: 4860809038136196861}
   - component: {fileID: 1427487644581661792}
   - component: {fileID: 8327968216170250273}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: polySurface20
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -629,7 +652,7 @@ Transform:
   m_GameObject: {fileID: 8184944379073769042}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -758,7 +781,7 @@ Transform:
   m_GameObject: {fileID: 8365632451461442629}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

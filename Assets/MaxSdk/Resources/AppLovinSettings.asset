@@ -15,7 +15,6 @@ MonoBehaviour:
   qualityServiceEnabled: 1
   sdkKey: sVWGuOQVG4gzyhb-2Qb6sRTv8qavlPzA-5V-1DcTfCWvHWTNRTTB12ENHdoQyLpX5rp1LVcPGq9Nol8469q4z7
   setAttributionReportEndpoint: 0
-  addApsSkAdNetworkIds: 0
   consentFlowEnabled: 0
   consentFlowPlatform: 0
   consentFlowPrivacyPolicyUrl: 

@@ -34,12 +34,21 @@ public class gaugueBehavior : MonoBehaviour
     public void claimReward()
     {
         claimed = true;
-
         //Play Reward Ad here
         //Initialize Admob reward callback in the script in which you are required to use rewarded ad for admob
-        AdsManager.Instance.RunRewardedAd(() => grantReward());
+        if (AdsManager.Instance.RunRewardedAd(() => grantReward()))
+        {
+            Debug.Log("Reward Ad Available");
+        }
+
+        else
+        {
+            Debug.Log("Reward Ad Unavailable");
+            grantReward();
+        }
+
         //Initialize Max reward callback in the script in which you are required to use rewarded ad for applovin
-        MaxSdkCallbacks.Rewarded.OnAdReceivedRewardEvent += OnRewardedAdReceivedRewardEvent;
+        //MaxSdkCallbacks.Rewarded.OnAdReceivedRewardEvent += OnRewardedAdReceivedRewardEvent;
     }
 
     public void getRewardInterstitial()

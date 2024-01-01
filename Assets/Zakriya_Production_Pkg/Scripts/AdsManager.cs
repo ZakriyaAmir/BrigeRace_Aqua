@@ -74,7 +74,6 @@ public class AdsManager : MonoBehaviour
     {
         if (Instance != null)
         {
-            Debug.Log("Zak3");
             Destroy(gameObject);
             return;
         }
@@ -182,38 +181,43 @@ public class AdsManager : MonoBehaviour
 
     public void HideBanner()
     {
-        if (maxBan) 
-        {
-            MediationManager.instance.HideBannerMax();
-            maxBan = false;
-        }
-        if (admobBan) 
+        if (admobBan)
         {
             AdmobManager.Instance.DestroyBannerView();
             AdmobManager.Instance.LoadBannerAd();
             admobBan = false;
         }
+        if (maxBan) 
+        {
+            MediationManager.instance.HideBannerMax();
+            maxBan = false;
+        }
     }
 
-    public void RunRewardedAd(Action rewardCallback)
+    public bool RunRewardedAd(Action rewardCallback)
     {
+        bool available = false;
         if (admobRewarded)
         {
             if (AdmobManager.Instance.ShowRewardedAd(rewardCallback) == true)
             {
                 Debug.Log("Admob Rewarded Ran");
+                available = true;
             }
             else if (maxRewarded)
             {
                 Debug.Log("Max Rewarded Ran");
+                available = true;
                 MediationManager.instance.ShowRewardedAdMax();
             }
         }
         else if (maxRewarded)
         {
             Debug.Log("Max Rewarded Ran");
+            available = true;
             MediationManager.instance.ShowRewardedAdMax();
         }
+        return available;
     }
 
     public void RunRewardedInterstitialAd(Action rewardCallback)

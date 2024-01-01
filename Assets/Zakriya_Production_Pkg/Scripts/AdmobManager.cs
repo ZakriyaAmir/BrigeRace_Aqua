@@ -30,19 +30,15 @@ public class AdmobManager : MonoBehaviour
 
     public void Awake()
     {
-        Debug.Log("Zak1");
         Instance = this;
-        Debug.Log("Zak2");
 
         _AdsManager = GetComponent<AdsManager>();
-        Debug.Log("Zak3");
 
         _adRewardedUnitId = _AdsManager.AdmobRewardedUnitId;
         _adBannerUnitId = _AdsManager.AdmobBannerUnitId;
         _adInterstitialUnitId = _AdsManager.AdmobInterstitialUnitId;
         _adRewardedInterstitialUnitId = _AdsManager.AdmobRewardedInterstitialUnitId;
         _adAppOpenAdUnitId = _AdsManager.AdmobAppOpenAdUnitId;
-        Debug.Log("Zak4");
 
         //AppStateEventNotifier.AppStateChanged += OnAppStateChanged;
     }
@@ -53,11 +49,9 @@ public class AdmobManager : MonoBehaviour
     }
     public void Start()
     {
-        Debug.Log("Zak5");
         // Initialize the Google Mobile Ads SDK.
         MobileAds.Initialize((InitializationStatus initStatus) =>
         {
-            Debug.Log("Zak6");
             Debug.Log("Admob Intitialized");
             LoadBannerAd();
             LoadRewardedAd();
@@ -417,7 +411,7 @@ public class AdmobManager : MonoBehaviour
         {
             AdRequest request = AdRequestBuild();
             _bannerView.LoadAd(request);
-
+            available = true;
             // send ad event
             FirebaseAnalytics.LogEvent("Admob" + "_Banner" + "_success");
         }

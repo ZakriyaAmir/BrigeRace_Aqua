@@ -36,7 +36,7 @@ public class mainMenu : MonoBehaviour
             consentPanel.SetActive(true);
         }
 
-       //PlayerPrefs.SetInt("levelsCompleted", 50);
+        //PlayerPrefs.SetInt("levelsCompleted", 50);
     }
 
     public void acceptConsent() 

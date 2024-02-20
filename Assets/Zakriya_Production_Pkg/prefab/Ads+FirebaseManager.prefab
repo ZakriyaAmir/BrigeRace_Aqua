@@ -46,9 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   testMode: 0
-  AdmobBannerUnitId: ca-app-pub-2150490078947114/8024515007
-  AdmobInterstitialUnitId: ca-app-pub-2150490078947114/1251223095
-  AdmobRewardedUnitId: ca-app-pub-2150490078947114/2137763502
+  AdmobBannerUnitId: ca-app-pub-2150490078947114/2601848658
+  AdmobInterstitialUnitId: ca-app-pub-2150490078947114/7413523333
+  AdmobRewardedUnitId: ca-app-pub-2150490078947114/3645652802
   AdmobRewardedInterstitialUnitId: 
   AdmobAppOpenAdUnitId: 
   admobInterstitial: 1

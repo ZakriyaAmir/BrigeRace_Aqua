@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "905632509069",
-    "project_id": "bridge-simulator-c0c42",
-    "storage_bucket": "bridge-simulator-c0c42.appspot.com"
+    "project_number": "454234418540",
+    "project_id": "fish-game-pool-race",
+    "storage_bucket": "fish-game-pool-race.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:905632509069:android:ff1ff9c2d08438d807c6c4",
+        "mobilesdk_app_id": "1:454234418540:android:755f653a69d9641e129749",
         "android_client_info": {
           "package_name": "com.gamytune.bridge.race.fish.games"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDKWcQEdp2xsboiBUdR3W0SPoUMEdgPDdc"
+          "current_key": "AIzaSyCsGDx3YmjLvHLjWPk0ioNLiMDTnpuTbmM"
         }
       ],
       "services": {

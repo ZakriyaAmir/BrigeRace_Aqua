@@ -31,11 +31,6 @@ public class mainMenu : MonoBehaviour
         Application.targetFrameRate = 120;
         mainPanel.SetActive(true);
 
-        if (PlayerPrefs.GetInt("consent", 0) == 0) 
-        {
-            consentPanel.SetActive(true);
-        }
-
         //PlayerPrefs.SetInt("levelsCompleted", 50);
     }
 
@@ -43,6 +38,7 @@ public class mainMenu : MonoBehaviour
     {
         PlayerPrefs.SetInt("consent", 1);
         consentPanel.SetActive(false);
+        AdsManager.Instance.Invoke("RunBannerAd", 4f);
     }
 
     public void rejectConsent()
@@ -60,7 +56,14 @@ public class mainMenu : MonoBehaviour
         updateMoney();
         audioManager.instance.PlayAudio("menuBGM", false, Vector3.zero);
 
-        AdsManager.Instance.Invoke("RunBannerAd", 4f);
+        if (PlayerPrefs.GetInt("consent", 0) == 0)
+        {
+            consentPanel.SetActive(true);
+        }
+        else
+        {
+            AdsManager.Instance.Invoke("RunBannerAd", 4f);
+        }
     }
 
     public void clearLevels() 

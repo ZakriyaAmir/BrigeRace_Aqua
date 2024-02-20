@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Firebase.Analytics;
-using Firebase;
+using System.Threading.Tasks;
 
 public class FireBaseInit : MonoBehaviour
 {
